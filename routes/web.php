@@ -22,3 +22,4 @@ Route::post('/hama', [HamaController::class, 'search'])->name('hama.search');
 
 Route::get('/pemupukan', [PemupukanController::class, 'index'])->name('pemupukan.index');
 Route::post('/pemupukan', [PemupukanController::class, 'search'])->name('pemupukan.search');
+Route::get('/pupuk', [PemupukanController::class, 'index']);

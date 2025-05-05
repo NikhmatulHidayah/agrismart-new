@@ -3,81 +3,33 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pupuk;
 
 class PemupukanController extends Controller
 {
-    /**
-     * Hardcode mapping rekomendasi pemupukan
-     */
-    public static function getPemupukanRecommendations()
+    public function index(Request $request)
     {
-        return [
-            'Lempung' => [
-                'Padi' => [
-                    'awal' => 'Gunakan Urea + SP-36 saat tanam',
-                    'susulan1' => 'Berikan KCL pada hari ke-30',
-                    'susulan2' => 'Tambahkan NPK pada hari ke-60'
-                ],
-                'Tomat' => [
-                    'awal' => 'Gunakan Pupuk Organik saat olah tanah',
-                    'susulan1' => 'Tambahkan NPK Mutiara hari ke-20',
-                    'susulan2' => 'Pupuk Daun hari ke-45'
-                ],
-            ],
-            'Berpasir' => [
-                'Cabai' => [
-                    'awal' => 'Gunakan Pupuk Kandang banyak saat olah tanah',
-                    'susulan1' => 'Berikan NPK seimbang hari ke-15',
-                    'susulan2' => 'Urea susulan hari ke-40'
-                ]
-            ],
-            // Bisa tambah mapping lain di sini
-        ];
-    }
+        // Ambil pilihan untuk dropdown
+        $tanamans = Pupuk::select('jenis_tanaman')->distinct()->pluck('jenis_tanaman');
+        $tanahs = Pupuk::select('kondisi_tanah')->distinct()->pluck('kondisi_tanah');
+        $tahaps = Pupuk::select('tahap_pertumbuhan')->distinct()->pluck('tahap_pertumbuhan');
 
-    /**
-     * Menampilkan halaman form pemupukan
-     */
-    public function index()
-    {
-        $recommendations = self::getPemupukanRecommendations();
-        $tanahs = array_keys($recommendations);
+        $data = null;
 
-        // Ambil semua tanaman unik dari semua tanah
-        $tanamans = [];
-        foreach ($recommendations as $jenisTanah => $dataTanah) {
-            foreach (array_keys($dataTanah) as $jenisTanaman) {
-                $tanamans[] = $jenisTanaman;
-            }
+        // Cek apakah user sudah memilih semua input
+        if ($request->filled(['jenis_tanaman', 'kondisi_tanah', 'tahap_pertumbuhan'])) {
+            $data = Pupuk::where('jenis_tanaman', $request->jenis_tanaman)
+                ->where('kondisi_tanah', $request->kondisi_tanah)
+                ->where('tahap_pertumbuhan', $request->tahap_pertumbuhan)
+                ->first();
         }
-        $tanamans = array_unique($tanamans); // Menghilangkan duplikat
 
-        return view('pemupukan.index', compact('tanahs', 'tanamans'));
-    }
-
-    /**
-     * Proses pencarian rekomendasi
-     */
-    public function search(Request $request)
-    {
-        $request->validate([
-            'jenis_tanah' => 'required|string',
-            'jenis_tanaman' => 'required|string'
+        return view('pemupukan.index', [
+            'tanamans' => $tanamans,
+            'tanahs' => $tanahs,
+            'tahaps' => $tahaps,
+            'rekomendasi' => $data,
+            'request' => $request,
         ]);
-
-        $recommendations = self::getPemupukanRecommendations();
-        $result = $recommendations[$request->jenis_tanah][$request->jenis_tanaman] ?? null;
-
-        $tanahs = array_keys($recommendations);
-
-        $tanamans = [];
-        foreach ($recommendations as $jenisTanah => $dataTanah) {
-            foreach (array_keys($dataTanah) as $jenisTanaman) {
-                $tanamans[] = $jenisTanaman;
-            }
-        }
-        $tanamans = array_unique($tanamans);
-
-        return view('pemupukan.index', compact('tanahs', 'tanamans', 'result', 'request'));
     }
 }
