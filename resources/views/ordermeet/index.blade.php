@@ -25,7 +25,7 @@
                 <tr>
                     <td>{{ $order->topic }}</td>
                     <td>{{ $order->date }}</td>
-                    <td>{{ $order->ahliTani->name ?? '-' }}</td>
+                    <td>{{ $order->expert ? $order->expert->name : '-' }}</td>
                     <td>
                         @if($order->is_done)
                             <span class="badge bg-success">Selesai</span>

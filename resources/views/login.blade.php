@@ -18,7 +18,7 @@
     </div>
 
     <div class="right">
-      <form class="form" action="/login/post" method="post">
+      <form class="form" action="{{ route('process_login') }}" method="post">
         @csrf
         <div class="input-box">
           <input type="email" name="email" placeholder="Enter email address" class="input-field" required>

@@ -5,8 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\OrderMeetController;
 use App\Http\Controllers\DashboardFarmerController;
-
-
+use App\Http\Controllers\DataTanamanController;
 
 Route::get('/login', function () {
     return view('login');
@@ -37,8 +36,8 @@ Route::get('/login', function () {
     // Petani
     Route::get('login/farmer/dashboard', function () {
         return view('dashboard'); // Pastikan kamu memiliki view dashboard.blade.php
-    })->name('dashboard');  // Tanpa middleware 'auth'
-Route::get('/tanaman', [TanamanController::class, 'index'])->name('tanaman.index');   
+    })->name('dashboard.farmer');  // Tanpa middleware 'auth'
+Route::get('/tanaman', [DataTanamanController::class, 'index'])->name('tanaman.index');   
 Route::get('/ordermeet', [OrderMeetController::class, 'index'])->name('ordermeet.index');  // Tanpa middleware 'auth'
 Route::get('/ordermeet/create', [OrderMeetController::class, 'create'])->name('ordermeet.create');  // Tanpa middleware 'auth'
 Route::post('/ordermeet/store', [OrderMeetController::class, 'store'])->name('ordermeet.store');  // Tanpa middleware 'auth'
@@ -81,6 +80,8 @@ Route::post('register/expert/post', [AuthController::class, 'postRegisterExpert'
 Route::get('login/expert', [AuthController::class, 'getLoginExpert']);
 Route::get('register/farmer', [AuthController::class, 'getRegisterFarmer']);
 Route::get('login/farmer', [AuthController::class, 'getLoginFarmer']);
-Route::post('login', [AuthController::class, 'postLogin']);
+Route::post('login', [AuthController::class, 'postLogin'])->name('process_login');
 Route::post('register/expert', [AuthController::class, 'postRegisterExpert']);
-Route::post('register/farmer', [AuthController::class, 'postRegisterFarmer']);
+Route::post('register/farmer', [AuthController::class, 'postRegisterFarmer'])->name('register.farmer');
+
+Route::get('/logout', [AuthController::class, 'logout'])->name('process.logout');

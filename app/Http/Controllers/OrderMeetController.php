@@ -15,7 +15,7 @@ class OrderMeetController extends Controller
             ->where('id_petani', Auth::id())
             ->latest()
             ->get();
-
+            
         return view('ordermeet.index', compact('orders'));
     }
 
@@ -23,16 +23,16 @@ class OrderMeetController extends Controller
     public function create()
     {
         // Kamu bisa ambil daftar ahli tani dari database untuk dropdown
-        $ahliTaniList = \App\Models\User::where('role', 'ahli_tani')->get();
+        $expertList = \App\Models\User::where('role', 'expert')->get();
 
-        return view('ordermeet.create', compact('ahliTaniList'));
+        return view('ordermeet.create', compact('expertList'));
     }
 
     // Petani: simpan order meet
     public function store(Request $request)
     {
         $request->validate([
-            'id_ahli_tani' => 'required|exists:users,id',
+            'id_expert' => 'required|exists:users,id',
             'amount' => 'required|integer|min:1',
             'topic' => 'nullable|string|max:255',
             'date' => 'required|date',
@@ -40,7 +40,7 @@ class OrderMeetController extends Controller
 
         OrderMeet::create([
             'id_petani' => Auth::id(),
-            'id_ahli_tani' => $request->id_ahli_tani,
+            'id_expert' => $request->id_expert,
             'amount' => $request->amount,
             'topic' => $request->topic,
             'date' => $request->date,

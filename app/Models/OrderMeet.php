@@ -22,7 +22,7 @@ class OrderMeet extends Model
         'is_confirmation',
         'payment_ahli',
         'id_petani',
-        'id_ahli_tani',
+        'id_expert',
     ];
 
     protected $casts = [
@@ -37,8 +37,8 @@ class OrderMeet extends Model
         return $this->belongsTo(User::class, 'id_petani');
     }
 
-    public function ahliTani()
+    public function expert()
     {
-        return $this->belongsTo(User::class, 'id_ahli_tani');
+        return $this->belongsTo(User::class, 'id_expert');
     }
 }

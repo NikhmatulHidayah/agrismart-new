@@ -107,10 +107,11 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav gap-3">
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/dashboard') }}">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('dashboard.farmer') }}">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/tanaman') }}">Monitoring</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/hama') }}">Hama</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/pemupukan') }}">Pemupukan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('process.logout') }}">Logout</a></li>
                 </ul>
             </div>
         </div>

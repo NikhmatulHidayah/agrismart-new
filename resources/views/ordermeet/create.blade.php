@@ -8,11 +8,11 @@
         @csrf
 
         <div class="mb-3">
-            <label for="id_ahli_tani" class="form-label">Pilih Ahli Tani</label>
-            <select name="id_ahli_tani" id="ahli_tani" class="form-select" required>
+            <label for="id_expert" class="form-label">Pilih Ahli Tani</label>
+            <select name="id_expert" id="expert" class="form-select" required>
                 <option value="">-- Pilih Ahli Tani --</option>
-                @foreach($ahliTaniList as $ahli)
-                    <option value="{{ $ahli->id }}">{{ $ahli->name }}</option>
+                @foreach($expertList as $expert)
+                    <option value="{{ $expert->id }}">{{ $expert->name }}</option>
                 @endforeach
             </select>
         </div>
