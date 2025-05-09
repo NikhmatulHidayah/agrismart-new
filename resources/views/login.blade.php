@@ -31,6 +31,10 @@
 
         <button type="submit" class="submit-btn">Sign In</button>
       </form>
+      <br>
+      <div class="register-link">
+        <p>Belum punya akun? <a href="/select-role" style="text-decoration:none; color: #49802c;">Register di sini</a></p>
+      </div>
     </div>
   </div>
 
