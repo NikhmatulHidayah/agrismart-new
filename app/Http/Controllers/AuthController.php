@@ -45,7 +45,7 @@ class AuthController extends Controller
     
         DB::table('users')->insert($data);
 
-        dd(response()->json(['message' => 'registered successfully']));
+        return redirect('/login');
     }
     public function postRegisterFarmer (Request $request) {
         
@@ -68,7 +68,7 @@ class AuthController extends Controller
     
         DB::table('users')->insert($data);
 
-        dd(response()->json(['message' => 'registered successfully']));
+        return redirect('/login');
     }
 
     public function postLogin(Request $request)
