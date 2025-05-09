@@ -12,6 +12,7 @@ class AuthController extends Controller
     public function getRegisterExpert(){
         return view('expert.register');
     }
+
     public function getLoginExpert(){
         return view('expert.login');
     }
@@ -19,11 +20,12 @@ class AuthController extends Controller
     public function getRegisterFarmer(){
         return view('farmer.register');
     }
+
     public function getLoginFarmer(){
         return view('farmer.login');
     }
-    public function postRegisterExpert (Request $request) {
-        
+
+    public function postRegisterExpert(Request $request) {
         $imagePath = null;
 
         if ($request->hasFile('image')) {
@@ -40,13 +42,13 @@ class AuthController extends Controller
             'picture' => $imagePath,
             'role' => 'expert',
         ];
-    
-        DB::table('users')->insert($data);
 
-        dd(response()->json(['message' => 'registered successfully']));
-    }
-    public function postRegisterFarmer (Request $request) {
+        DB::table('users')->insert($data);
         
+        return redirect('/select-role')->with('success', 'Akun berhasil dibuat. Silahkan login.');
+    }
+
+    public function postRegisterFarmer(Request $request) {
         $imagePath = null;
 
         if ($request->hasFile('image')) {
@@ -63,15 +65,14 @@ class AuthController extends Controller
             'picture' => $imagePath,
             'role' => 'farmer',
         ];
-    
+
         DB::table('users')->insert($data);
 
-        dd(response()->json(['message' => 'registered successfully']));
+        return redirect('/select-role')->with('success', 'Akun berhasil dibuat. Silahkan login.');
     }
 
     public function postLogin(Request $request)
     {
-        
         $request->validate([
             'email' => 'required',
             'password' => 'required'
@@ -80,21 +81,21 @@ class AuthController extends Controller
         $user = DB::table('users')->where('email', $request->email)->first();
 
         if ($user && Hash::check($request->password, $user->password)) {
+            // Set session
             Session::put('user_id', $user->id);
         
+            // Redirect based on user role
             if ($user->role === 'admin') {
                 return redirect('/admin');
             } elseif ($user->role === 'expert') {
                 return redirect('/expert');
             } elseif ($user->role === 'farmer') {
-                return redirect('/farmer');
+                return redirect('farmer/views/dashboard');
             } else {
                 return redirect('/')->withErrors(['login_error' => 'Role tidak dikenali']);
             }
-
         } else {
             return back()->withErrors(['login_error' => 'Email atau Password salah!'])->withInput();
         }
     }
-
 }

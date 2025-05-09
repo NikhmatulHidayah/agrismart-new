@@ -81,6 +81,18 @@
                 </div>
             </div>
 
+            <!-- Card 4 -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="450">
+                <div class="card shadow-sm border-0 h-100 text-center fitur-card bg-white" style="transition: all 0.3s;">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                        <img src="{{ asset('images/icons/ordermeet.png') }}" alt="Order Meet" width="70" class="mb-4">
+                        <h5 class="card-title fw-bold text-success">order meet</h5>
+                        <p class="card-text mt-2">Panduan pemupukan optimal berbasis tanah dan kebutuhan tanamanmu.</p>
+                        <a href="{{ route('ordermeet.index') }}" class="btn btn-outline-success rounded-pill mt-3 px-4">Cari</a>
+                    </div>
+                </div>
+            </div> 
+
         </div>
     </div>
 </section>
