@@ -40,6 +40,8 @@ class AuthController extends Controller
             'picture' => $imagePath,
             'role' => 'expert',
         ];
+
+        //dd($data);
     
         DB::table('users')->insert($data);
 
