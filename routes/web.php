@@ -53,4 +53,6 @@ Route::post('/register/expert/post', [AuthController::class, 'PostRegisterExpert
 Route::get('/register/farmer', [AuthController::class, 'getRegisterfarmer']);
 Route::post('/register/farmer/post', [AuthController::class, 'PostRegisterfarmer']);
 
-
+Route::fallback(function () {
+    return redirect('/login');
+});
