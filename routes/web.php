@@ -34,18 +34,13 @@ Route::get('/pupuk', [PemupukanController::class, 'index']);
 Route::get('/select-role', function () {
     return view('select-role');
 });
+
 Route::get('/expert', function () {
     return view('expert.dashboard');
 });
-Route::get('/expert/articles', function () {
-    return view('expert.articles-main');
-});
-Route::get('/expert/articles/create', function () {
-    return view('expert.articles-create');
-});
+
 
 Route::post('/login/post', [AuthController::class, 'postLogin']);
-Route::post('/expert/articles/create/post', [ArticlesController::class, 'postCreateArticle']);
 
 Route::get('/register/expert', [AuthController::class, 'getRegisterExpert']);
 Route::post('/register/expert/post', [AuthController::class, 'PostRegisterExpert']);
@@ -56,3 +51,8 @@ Route::post('/register/farmer/post', [AuthController::class, 'PostRegisterfarmer
 Route::fallback(function () {
     return redirect('/login');
 });
+
+Route::get('/expert/articles', [ArticlesController::class, 'index']);
+Route::get('/expert/articles/create', [ArticlesController::class, 'create']);
+Route::get('/expert/articles/{id}', [ArticlesController::class, 'show']);
+Route::post('/expert/articles/create/post', [ArticlesController::class, 'postCreateArticle']);
