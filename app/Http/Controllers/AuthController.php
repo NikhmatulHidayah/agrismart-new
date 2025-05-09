@@ -90,7 +90,7 @@ class AuthController extends Controller
             } elseif ($user->role === 'expert') {
                 return redirect('/expert');
             } elseif ($user->role === 'farmer') {
-                return redirect('farmer/views/dashboard');
+                return redirect('farmer');
             } else {
                 return redirect('/')->withErrors(['login_error' => 'Role tidak dikenali']);
             }
