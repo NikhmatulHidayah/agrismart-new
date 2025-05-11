@@ -87,8 +87,8 @@
                     <div class="card-body d-flex flex-column justify-content-center align-items-center">
                         <img src="{{ asset('images/icons/ordermeet.png') }}" alt="Order Meet" width="70" class="mb-4">
                         <h5 class="card-title fw-bold text-success">order meet</h5>
-                        <p class="card-text mt-2">Panduan pemupukan optimal berbasis tanah dan kebutuhan tanamanmu.</p>
-                        <a href="{{ route('ordermeet.index') }}" class="btn btn-outline-success rounded-pill mt-3 px-4">Cari</a>
+                        <p class="card-text mt-2">Ayo berdiskusi langsung dengan Expert kami dalam hal bertani.</p>
+                        <a href="{{ route('ordermeet.index') }}" class="btn btn-outline-success rounded-pill mt-3 px-4">Lihat</a>
                     </div>
                 </div>
             </div> 

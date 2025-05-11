@@ -44,8 +44,8 @@ Route::post('/ordermeet/store', [OrderMeetController::class, 'store'])->name('or
     
 
 // Ahli Tani
-Route::get('/ordermeet/manage', [OrderMeetController::class, 'manage'])->name('ordermeet.manage');
-Route::post('/ordermeet/confirm/{id}', [OrderMeetController::class, 'confirm'])->name('ordermeet.confirm');
+Route::get('expert/ordermeet/manage', [OrderMeetController::class, 'manage'])->name('ordermeet.manage');
+Route::post('expert/ordermeet/confirm/{id}', [OrderMeetController::class, 'confirm'])->name('ordermeet.confirm');
 
 
 // Ahli Tani Routes

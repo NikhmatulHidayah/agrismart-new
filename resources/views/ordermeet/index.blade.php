@@ -35,6 +35,15 @@
                             <span class="badge bg-secondary">Menunggu</span>
                         @endif
                     </td>
+                    <td>
+                        @if($order->link_meet)
+                            <a href="{{ $order->link_meet }}" target="_blank" class="btn btn-sm btn-primary">
+                                Join Meet
+                            </a>
+                        @else
+                            <span class="text-muted">Belum tersedia</span>
+                        @endif
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

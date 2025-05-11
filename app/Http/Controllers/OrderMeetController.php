@@ -57,7 +57,7 @@ class OrderMeetController extends Controller
     public function manage()
     {
         $orders = OrderMeet::with('petani')
-            ->where('id_ahli_tani', Auth::id())
+            ->where('id_expert', Auth::id())
             ->latest()
             ->get();
 
@@ -72,7 +72,7 @@ class OrderMeetController extends Controller
         ]);
 
         $order = OrderMeet::where('id', $id)
-            ->where('id_ahli_tani', Auth::id())
+            ->where('id_expert', Auth::id())
             ->firstOrFail();
 
         $order->update([

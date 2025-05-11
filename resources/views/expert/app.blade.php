@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgriSmart Dashboard</title>
+    <title>AgriSmart Dashboard Expert</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -112,7 +112,8 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url('/hama') }}">Hama</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/pemupukan') }}">Pemupukan</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('process.logout') }}">Logout</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Halo, Farmer {{ Auth::user()->name }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Halo, Expert {{ Auth::user()->name }}</a></li>
+                    </li>
                     
                 </ul>
             </div>
