@@ -6,6 +6,7 @@ use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\OrderMeetController;
 use App\Http\Controllers\DashboardFarmerController;
 use App\Http\Controllers\DataTanamanController;
+use App\Http\Controllers\KonsultasiController;
 
 Route::get('/login', function () {
     return view('login');
@@ -85,3 +86,26 @@ Route::post('register/expert', [AuthController::class, 'postRegisterExpert']);
 Route::post('register/farmer', [AuthController::class, 'postRegisterFarmer'])->name('register.farmer');
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('process.logout');
+
+// Rute untuk memilih ahli tani
+Route::get('/konsultasi', [KonsultasiController::class, 'index'])->name('konsultasi.index');
+
+// Rute untuk memilih ahli tani berdasarkan ID
+Route::get('/konsultasi/ahli_tani/{id}', [KonsultasiController::class, 'pilihAhliTani'])->name('konsultasi.pilihAhliTani');
+
+// Route untuk proses pembayaran konsultasi
+Route::post('/proses-pembayaran', [KonsultasiController::class, 'prosesPembayaran'])->name('proses_pembayaran');
+
+// routes/web.php
+Route::get('/pembayaran/{id}', [KonsultasiController::class, 'pembayaran'])->name('pembayaran');
+
+// Route sukses pembayaran konsultasi
+Route::get('/pembayaran-sukses', function () {
+    return view('konsultasi.pembayaran_sukses');
+})->name('pembayaran_sukses');
+
+Route::get('/isi-konsultasi', [App\Http\Controllers\KonsultasiController::class, 'formKonsultasi'])->name('isi_konsultasi');
+Route::post('/isi-konsultasi', [App\Http\Controllers\KonsultasiController::class, 'submitKonsultasi'])->name('submit_konsultasi');
+
+Route::get('/konsultasi-sukses', [App\Http\Controllers\KonsultasiController::class, 'konsultasiSukses'])->name('konsultasi_sukses');
+

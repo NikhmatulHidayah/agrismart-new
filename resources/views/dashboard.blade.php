@@ -81,8 +81,20 @@
                 </div>
             </div>
 
-            <!-- Card 4 -->
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="450">
+            <!-- Card 4 for Konsultasi -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+                <div class="card shadow-sm border-0 h-100 text-center fitur-card bg-white" style="transition: all 0.3s;">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                        <img src="{{ asset('images/icons/konsultasi.jpeg') }}" alt="Konsultasi" width="70" class="mb-4">
+                        <h5 class="card-title fw-bold text-info">Konsultasi</h5>
+                        <p class="card-text mt-2">Bingung dengan tanaman atau hama? Konsultasikan langsung dengan ahli kami!</p>
+                        <a href="{{ url('/konsultasi') }}" class="btn btn-outline-info rounded-pill mt-3 px-4">Konsultasi</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="750">
                 <div class="card shadow-sm border-0 h-100 text-center fitur-card bg-white" style="transition: all 0.3s;">
                     <div class="card-body d-flex flex-column justify-content-center align-items-center">
                         <img src="{{ asset('images/icons/ordermeet.png') }}" alt="Order Meet" width="70" class="mb-4">
@@ -97,29 +109,36 @@
     </div>
 </section>
 
-<!-- CSS Tambahan -->
-<style>
-    .fitur-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 12px 24px rgba(21, 84, 42, 0.25);
-    }
-    .btn:hover {
-        transform: scale(1.05);
-    }
-    html {
-        scroll-behavior: smooth;
-    }
-</style>
+<!-- Footer -->
+<footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h5><i class="fas fa-seedling"></i> AgriSmart </h5>
+                <p>Your smart partner for sustainable agriculture in Indonesia.</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Contact Us</h5>
+                <address>
+                    <i class="fas fa-map-marker-alt"></i> Jl. Telekomunikasi No. 1, Bandung Terusan Buahbatu<br>
+                    <i class="fas fa-phone"></i> +6282145772310<br>
+                    <i class="fas fa-envelope"></i> info@agrismart.com
+                </address>
+                <div class="social-icons">
+                    <a href="https://wa.me/6282145772310"><i class="fab fa-whatsapp" style="font-size: 30px;"></i></a>
+                    <a href="https://www.instagram.com/aryva_23/"><i class="fab fa-instagram" style="font-size: 30px;"></i></a>
+                </div>                
+            </div>
+        </div>
+        <hr>
+        <div class="text-center">
+            <p>&copy; 2025 AgriSmart. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
 
-<!-- Tambahkan AOS.js -->
-@push('scripts')
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script>
-    AOS.init({
-        duration: 1000,
-        once: true,
-    });
-</script>
-@endpush
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('js/main.js') }}"></script>
+@yield('extra_js')
 
 @endsection
