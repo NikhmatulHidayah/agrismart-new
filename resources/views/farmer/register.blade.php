@@ -18,7 +18,7 @@
     </div>
 
     <div class="right">
-      <form class="form" action="/register/farmer/post" method="POST" enctype="multipart/form-data">
+      <form class="form" action="{{ route('register.farmer') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="input-box mb-3">
           <input type="text" name="name" placeholder="Enter name" class="input-field" required>
