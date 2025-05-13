@@ -64,7 +64,7 @@
                         <img src="{{ asset('images/icons/hama.png') }}" alt="Hama" width="70" class="mb-4">
                         <h5 class="card-title fw-bold text-warning">Penanganan Hama</h5>
                         <p class="card-text mt-2">Cari solusi cepat untuk melindungi tanaman dari berbagai serangan hama.</p>
-                        <a href="{{ url('/hama') }}" class="btn btn-outline-warning text-dark rounded-pill mt-3 px-4">Lihat</a>
+                        <a href{{ route('hama.index') }}" class="btn btn-outline-warning text-dark rounded-pill mt-3 px-4">Lihat</a>
                     </div>
                 </div>
             </div>

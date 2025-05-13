@@ -6,6 +6,8 @@ use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\OrderMeetController;
 use App\Http\Controllers\DashboardFarmerController;
 use App\Http\Controllers\DataTanamanController;
+use App\Http\Controllers\HamaController;
+use App\Http\Controllers\PemupukanController;
 
 Route::get('/login', function () {
     return view('login');
@@ -37,7 +39,9 @@ Route::get('/login', function () {
     Route::get('login/farmer/dashboard', function () {
         return view('dashboard'); // Pastikan kamu memiliki view dashboard.blade.php
     })->name('dashboard.farmer');  // Tanpa middleware 'auth'
-Route::get('/tanaman', [DataTanamanController::class, 'index'])->name('tanaman.index');   
+Route::resource('tanaman', DataTanamanController::class); 
+Route::get('/hama', [HamaController::class, 'index'])->name('hama.index');
+Route::get('/pemupukan', [PemupukanController::class, 'index'])->name('pemupukan.index');
 Route::get('/ordermeet', [OrderMeetController::class, 'index'])->name('ordermeet.index');  // Tanpa middleware 'auth'
 Route::get('/ordermeet/create', [OrderMeetController::class, 'create'])->name('ordermeet.create');  // Tanpa middleware 'auth'
 Route::post('/ordermeet/store', [OrderMeetController::class, 'store'])->name('ordermeet.store');  // Tanpa middleware 'auth'
