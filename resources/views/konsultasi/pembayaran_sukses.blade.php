@@ -5,12 +5,18 @@
     .success-card {
         border-radius: 24px;
         box-shadow: 0 8px 32px rgba(20, 83, 45, 0.18), 0 1.5px 4px rgba(20, 83, 45, 0.10);
-        border: none;
-        background: #fff;
-        margin-top: 60px;
+        border: 2px solid #bbf7d0;
+        background: linear-gradient(135deg, rgba(226,244,225,0.85) 0%, rgba(255,255,255,0.85) 100%);
+        /* margin-top: 60px; */
         animation: zoomIn 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         position: relative;
         overflow: visible;
+    }
+    .center-vertically {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     @keyframes zoomIn {
         0% {
@@ -50,9 +56,22 @@
         background: linear-gradient(90deg, #22d3ee 60%, #16a34a 100%);
         color: #fff;
     }
+    .btn-green-muda {
+        background: #6ee7b7;
+        color: #14532d;
+        border: none;
+        font-weight: 600;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(20, 83, 45, 0.10);
+        transition: background 0.2s, box-shadow 0.2s;
+    }
+    .btn-green-muda:hover {
+        background: #a7f3d0;
+        color: #14532d;
+    }
 </style>
-<div class="container">
-    <div class="row justify-content-center">
+<div class="container center-vertically">
+    <div class="row justify-content-center w-100">
         <div class="col-md-8">
             <div class="card text-center success-card">
                 <canvas class="confetti"></canvas>
@@ -62,7 +81,7 @@
                     </div>
                     <h2 class="text-success mb-3">Pembayaran Berhasil!</h2>
                     <p class="lead mb-4">Terima kasih, pembayaran konsultasi Anda telah berhasil diproses.<br>Silakan tunggu konfirmasi dari ahli tani.</p>
-                    <a href="{{ route('isi_konsultasi') }}" class="btn btn-primary px-4">Isi Konsultasi</a>
+                    <a href="{{ route('isi_konsultasi') }}" class="btn btn-green-muda px-4">Isi Konsultasi</a>
                 </div>
             </div>
         </div>

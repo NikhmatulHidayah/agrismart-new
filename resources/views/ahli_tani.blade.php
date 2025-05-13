@@ -27,6 +27,13 @@
 
 <!-- CSS Tambahan -->
 <style>
+    .fitur-card {
+        background: linear-gradient(135deg, rgba(226,244,225,0.85) 0%, rgba(255,255,255,0.85) 100%) !important;
+        border: 2px solid #bbf7d0 !important;
+        box-shadow: 0 8px 32px rgba(20, 83, 45, 0.13), 0 1.5px 4px rgba(20, 83, 45, 0.08);
+        border-radius: 15px;
+        transition: 0.3s;
+    }
     .fitur-card:hover {
         transform: translateY(-10px);
         box-shadow: 0 12px 24px rgba(21, 84, 42, 0.25);
