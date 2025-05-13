@@ -45,17 +45,6 @@
         <h2 class="text-center fw-bold mb-5" style="color: #14532d;" data-aos="fade-up">Fitur AgriSmart</h2>
 
         <div class="row g-4">
-            <!-- Card 1 -->
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
-                <div class="card shadow-sm border-0 h-100 text-center fitur-card bg-white" style="transition: all 0.3s;">
-                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                        <img src="{{ asset('images/icons/monitoring.png') }}" alt="Monitoring" width="70" class="mb-4">
-                        <h5 class="card-title fw-bold text-success">konsultasi</h5>
-                        <p class="card-text mt-2">Untuk Melakukan konfirmasi konsultasi</p>
-                        <a href="{{ route('tanaman.index') }}" class="btn btn-outline-success rounded-pill mt-3 px-4">Lihat</a>
-                    </div>
-                </div>
-            </div>
             <!-- Card 4 -->
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="450">
                 <div class="card shadow-sm border-0 h-100 text-center fitur-card bg-white" style="transition: all 0.3s;">
@@ -64,6 +53,17 @@
                         <h5 class="card-title fw-bold text-success">order meet</h5>
                         <p class="card-text mt-2">Untuk melakukan konfirmasi order meet</p>
                         <a href="{{ route('ordermeet.manage') }}" class="btn btn-outline-success rounded-pill mt-3 px-4">Lihat</a>
+                    </div>
+                </div>
+            </div> 
+            <!-- Card 5 -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="450">
+                <div class="card shadow-sm border-0 h-100 text-center fitur-card bg-white" style="transition: all 0.3s;">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                        <img src="{{ asset('images/icons/articles.png') }}" alt="Order Meet" width="70" class="mb-4">
+                        <h5 class="card-title fw-bold text-success">Articcels</h5>
+                        <p class="card-text mt-2">Untuk melihat artricels</p>
+                        <a href="/expert/articles" class="btn btn-outline-success rounded-pill mt-3 px-4">Lihat</a>
                     </div>
                 </div>
             </div> 
