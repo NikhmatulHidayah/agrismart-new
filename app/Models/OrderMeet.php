@@ -22,7 +22,7 @@ class OrderMeet extends Model
         'is_confirmation',
         'payment_ahli',
         'id_petani',
-        'id_expert',
+        'id_ahli_tani',
     ];
 
     protected $casts = [

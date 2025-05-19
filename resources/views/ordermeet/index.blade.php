@@ -18,6 +18,7 @@
                     <th>Tanggal</th>
                     <th>Ahli Tani</th>
                     <th>Status</th>
+                    <th>Link Meet</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,7 +26,7 @@
                 <tr>
                     <td>{{ $order->topic }}</td>
                     <td>{{ $order->date }}</td>
-                    <td>{{ $order->expert ? $order->expert->name : '-' }}</td>
+                    <td>{{ $order->ahli_name }}</td>
                     <td>
                         @if($order->is_done)
                             <span class="badge bg-success">Selesai</span>

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Session;
 class AuthController extends Controller
 {
     public function getRegisterExpert()
@@ -80,6 +80,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             $user = Auth::user();
+            Session::put('user_id', $user->id);
 
             if ($user->role === 'admin') {
                 return redirect('/admin');
