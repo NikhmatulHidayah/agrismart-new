@@ -11,6 +11,8 @@ class DataTanaman extends Model
 
     protected $table = 'data_tanaman';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'nama_tanaman',
         'picture',

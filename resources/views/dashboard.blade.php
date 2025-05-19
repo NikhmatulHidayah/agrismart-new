@@ -1,5 +1,5 @@
-@extends('expert.app')
-@section('title', 'Dashboard Expert')
+@extends('layouts.app')
+
 @section('content')
 
 <!-- Hero Section -->
@@ -45,25 +45,50 @@
         <h2 class="text-center fw-bold mb-5" style="color: #14532d;" data-aos="fade-up">Fitur AgriSmart</h2>
 
         <div class="row g-4">
+            <!-- Card 1 -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
+                <div class="card shadow-sm border-0 h-100 text-center fitur-card bg-white" style="transition: all 0.3s;">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                        <img src="{{ asset('images/icons/monitoring.png') }}" alt="Monitoring" width="70" class="mb-4">
+                        <h5 class="card-title fw-bold text-success">Monitoring Tanaman</h5>
+                        <p class="card-text mt-2">Pantau pertumbuhan tanamanmu secara rutin dan akurat.</p>
+                        <a href="{{ route('tanaman.index') }}" class="btn btn-outline-success rounded-pill mt-3 px-4">Lihat</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="card shadow-sm border-0 h-100 text-center fitur-card bg-white" style="transition: all 0.3s;">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                        <img src="{{ asset('images/icons/hama.png') }}" alt="Hama" width="70" class="mb-4">
+                        <h5 class="card-title fw-bold text-warning">Penanganan Hama</h5>
+                        <p class="card-text mt-2">Cari solusi cepat untuk melindungi tanaman dari berbagai serangan hama.</p>
+                        <a href="{{ url('hama') }}" class="btn btn-outline-warning text-dark rounded-pill mt-3 px-4">Lihat</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="450">
+                <div class="card shadow-sm border-0 h-100 text-center fitur-card bg-white" style="transition: all 0.3s;">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                        <img src="{{ asset('images/icons/pupuk.png') }}" alt="Pemupukan" width="70" class="mb-4">
+                        <h5 class="card-title fw-bold text-success">Saran Pemupukan</h5>
+                        <p class="card-text mt-2">Panduan pemupukan optimal berbasis tanah dan kebutuhan tanamanmu.</p>
+                        <a href="{{ url('/pemupukan') }}" class="btn btn-outline-success rounded-pill mt-3 px-4">Cari</a>
+                    </div>
+                </div>
+            </div>
+
             <!-- Card 4 -->
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="450">
                 <div class="card shadow-sm border-0 h-100 text-center fitur-card bg-white" style="transition: all 0.3s;">
                     <div class="card-body d-flex flex-column justify-content-center align-items-center">
                         <img src="{{ asset('images/icons/ordermeet.png') }}" alt="Order Meet" width="70" class="mb-4">
                         <h5 class="card-title fw-bold text-success">order meet</h5>
-                        <p class="card-text mt-2">Untuk melakukan konfirmasi order meet</p>
-                        <a href="{{ route('ordermeet.manage') }}" class="btn btn-outline-success rounded-pill mt-3 px-4">Lihat</a>
-                    </div>
-                </div>
-            </div> 
-            <!-- Card 5 -->
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="450">
-                <div class="card shadow-sm border-0 h-100 text-center fitur-card bg-white" style="transition: all 0.3s;">
-                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                        <img src="{{ asset('images/icons/articles.png') }}" alt="Order Meet" width="70" class="mb-4">
-                        <h5 class="card-title fw-bold text-success">Articcels</h5>
-                        <p class="card-text mt-2">Untuk melihat artricels</p>
-                        <a href="/expert/articles" class="btn btn-outline-success rounded-pill mt-3 px-4">Lihat</a>
+                        <p class="card-text mt-2">Ayo berdiskusi langsung dengan Expert kami dalam hal bertani.</p>
+                        <a href="{{ route('ordermeet.index') }}" class="btn btn-outline-success rounded-pill mt-3 px-4">Lihat</a>
                     </div>
                 </div>
             </div> 
@@ -98,4 +123,3 @@
 @endpush
 
 @endsection
- 

@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Session;
 
 class ArticlesController extends Controller
 {
+    public function index(){
+        $articles = DB::table('articles')->limit(6)->get();
+        return view('expert.articles-main', compact('articles'));
+    }
+    public function create(){
+        return view('expert.articles-create');
+    }
     public function postCreateArticle(Request $request)
     {
         $userId = Session::get('user_id');
@@ -39,5 +46,15 @@ class ArticlesController extends Controller
         DB::table('articles')->insert($data);
     
         return redirect('/expert/articles')->with('success', 'Artikel berhasil dibuat!');
+    }
+
+    public function show($id){
+        $article = DB::table('articles')->where('id', $id)->first();
+
+        if (!$article) {
+            abort(404);
+        }
+
+        return view('expert.articles-show', compact('article'));
     }
 }
