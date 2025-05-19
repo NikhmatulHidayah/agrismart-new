@@ -6,6 +6,9 @@ use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\OrderMeetController;
 use App\Http\Controllers\DashboardFarmerController;
 use App\Http\Controllers\DataTanamanController;
+use App\Http\Controllers\HamaController;
+use App\Http\Controllers\PemupukanController;
+use App\Http\Controllers\DataAhliTaniController;
 use App\Http\Controllers\KonsultasiController;
 
 Route::get('/login', function () {
@@ -38,7 +41,9 @@ Route::get('/login', function () {
     Route::get('login/farmer/dashboard', function () {
         return view('dashboard'); // Pastikan kamu memiliki view dashboard.blade.php
     })->name('dashboard.farmer');  // Tanpa middleware 'auth'
-Route::get('/tanaman', [DataTanamanController::class, 'index'])->name('tanaman.index');   
+Route::resource('tanaman', DataTanamanController::class); 
+Route::get('/hama', [HamaController::class, 'index'])->name('hama.index');
+Route::get('/pemupukan', [PemupukanController::class, 'index'])->name('pemupukan.index');
 Route::get('/ordermeet', [OrderMeetController::class, 'index'])->name('ordermeet.index');  // Tanpa middleware 'auth'
 Route::get('/ordermeet/create', [OrderMeetController::class, 'create'])->name('ordermeet.create');  // Tanpa middleware 'auth'
 Route::post('/ordermeet/store', [OrderMeetController::class, 'store'])->name('ordermeet.store');  // Tanpa middleware 'auth'
@@ -57,15 +62,11 @@ Route::post('expert/ordermeet/confirm/{id}', [OrderMeetController::class, 'confi
 Route::get('/select-role', function () {
     return view('select-role');
 });
+
 Route::get('/expert', function () {
     return view('expert.dashboard');
-});
-Route::get('/expert/articles', function () {
-    return view('expert.articles-main');
-});
-Route::get('/expert/articles/create', function () {
-    return view('expert.articles-create');
-});
+})->name('expert.dashboard');
+
 
 // Route::post('/login/post', [AuthController::class, 'postLogin']);
 // Route::post('/expert/articles/create/post', [ArticlesController::class, 'postCreateArticle']);
@@ -85,7 +86,24 @@ Route::post('login', [AuthController::class, 'postLogin'])->name('process_login'
 Route::post('register/expert', [AuthController::class, 'postRegisterExpert']);
 Route::post('register/farmer', [AuthController::class, 'postRegisterFarmer'])->name('register.farmer');
 
+Route::fallback(function () {
+    return redirect('/login');
+});
+
+Route::get('/expert/articles', [ArticlesController::class, 'index']);
+Route::get('/expert/articles/create', [ArticlesController::class, 'create']);
+Route::get('/expert/articles/{id}', [ArticlesController::class, 'show']);
+Route::post('/expert/articles/create/post', [ArticlesController::class, 'postCreateArticle']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('process.logout');
+
+// Expert Profile Routes
+Route::middleware('auth')->prefix('expert')->name('expert.')->group(function () {
+    Route::get('/profile', [DataAhliTaniController::class, 'index'])->name('profile.index');
+    Route::get('/profile/create', [DataAhliTaniController::class, 'create'])->name('profile.create');
+    Route::post('/profile', [DataAhliTaniController::class, 'store'])->name('profile.store');
+    Route::get('/profile/edit', [DataAhliTaniController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [DataAhliTaniController::class, 'update'])->name('profile.update');
+});
 
 // Rute untuk memilih ahli tani
 Route::get('/konsultasi', [KonsultasiController::class, 'index'])->name('konsultasi.index');
@@ -108,4 +126,3 @@ Route::get('/isi-konsultasi', [App\Http\Controllers\KonsultasiController::class,
 Route::post('/isi-konsultasi', [App\Http\Controllers\KonsultasiController::class, 'submitKonsultasi'])->name('submit_konsultasi');
 
 Route::get('/konsultasi-sukses', [App\Http\Controllers\KonsultasiController::class, 'konsultasiSukses'])->name('konsultasi_sukses');
-

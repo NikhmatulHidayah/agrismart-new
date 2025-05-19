@@ -40,7 +40,7 @@
 </section>
 
 <!-- Section Fitur -->
-<section id="fitur" class="py-5" style="background-color: #e9f7ef;">
+<section id="fitur" class="py-5 mt-5" style="background-color: #e9f7ef;">
     <div class="container">
         <h2 class="text-center fw-bold mb-5" style="color: #14532d;" data-aos="fade-up">Fitur AgriSmart</h2>
 
@@ -67,7 +67,17 @@
                     </div>
                 </div>
             </div> 
-
+            <!-- Card Profil Keahlian -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+                <div class="card shadow-sm border-0 h-100 text-center fitur-card bg-white" style="transition: all 0.3s;">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                        <img src="https://img.icons8.com/ios-filled/70/14532d/administrator-male.png" alt="Profil Keahlian" width="70" class="mb-4">
+                        <h5 class="card-title fw-bold text-success">Profil Keahlian</h5>
+                        <p class="card-text mt-2">Kelola data keahlian, sertifikat, pengalaman, dan biaya konsultasi Anda.</p>
+                        <a href="{{ route('expert.profile.index') }}" class="btn btn-outline-success rounded-pill mt-3 px-4">Lihat Profil</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
