@@ -32,7 +32,7 @@ class DataAhliTaniController extends Controller
 
         $data = [
             'id_ahli_tani' => Auth::id(),
-            'status' => $request->status,
+            'status' => 'Pending',
             'expired_certificate' => $request->expired_certificate,
             'price' => $request->price,
             'yoe' => $request->yoe,
@@ -59,7 +59,6 @@ class DataAhliTaniController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'status' => 'required|string',
             'certificate' => 'required|string',
             'expired_certificate' => 'required|date',
             'price' => 'required|numeric',
@@ -68,7 +67,13 @@ class DataAhliTaniController extends Controller
         ]);
 
         $dataAhliTani = DataAhliTani::where('id_ahli_tani', Auth::id())->first();
-        $dataAhliTani->update($request->all());
+        $dataAhliTani->update([
+            'certificate' => $request->certificate,
+            'expired_certificate' => $request->expired_certificate,
+            'price' => $request->price,
+            'yoe' => $request->yoe,
+            'alumni' => $request->alumni,
+        ]);
 
         return redirect()->route('expert.profile.index')->with('success', 'Data ahli tani berhasil diperbarui');
     }

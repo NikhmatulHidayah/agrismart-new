@@ -16,7 +16,7 @@
                         <h5 class="card-title fw-bold text-success">{{ $ahliTani->user->name ?? 'Ahli Tani' }}</h5>
                         <p class="card-text mt-2 text-muted">Alumni: {{ $ahliTani->alumni }}</p>
                         <h6 class="mt-3 text-primary">Rp {{ number_format($ahliTani->price ?? 0, 0, ',', '.') }}</h6>
-                        <a href="{{ url('/konsultasi/pembayaran/' . $ahliTani->id_ahli_tani) }}" class="btn btn-success rounded-pill mt-3 px-4 shadow-sm">Pilih</a>
+                        <a href="{{ route('konsultasi.pilihAhliTani', $ahliTani->id_ahli_tani) }}" class="btn btn-success rounded-pill mt-3 px-4 shadow-sm">Pilih</a>
                     </div>
                 </div>
             </div>

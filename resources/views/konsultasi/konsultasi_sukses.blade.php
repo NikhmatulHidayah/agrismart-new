@@ -83,6 +83,7 @@
                     <a href="{{ route('dashboard.farmer') }}" class="btn success-btn px-4 mt-4">Selesai</a>
                 </div>
             </div>
+            <div class="alert alert-success mt-4">Konsultasi berhasil dikirim!</div>
         </div>
     </div>
 </div>

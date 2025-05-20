@@ -11,16 +11,7 @@
                 <div class="card-body">
                     <form action="{{ route('expert.profile.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <div class="mb-3">
-                            <label for="status" class="form-label">Status</label>
-                            <select class="form-control @error('status') is-invalid @enderror" id="status" name="status" required>
-                                <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
-                                <option value="non active" {{ old('status') == 'non active' ? 'selected' : '' }}>Non Active</option>
-                            </select>
-                            @error('status')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                        <input type="hidden" name="status" value="Pending">
                         <div class="mb-3">
                             <label for="certificate" class="form-label">Sertifikat (Upload Gambar)</label>
                             <input type="file" class="form-control @error('certificate') is-invalid @enderror" id="certificate" name="certificate" accept="image/*" required>

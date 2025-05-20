@@ -19,7 +19,13 @@
                     @if($dataAhliTani)
                         <div class="mb-3">
                             <h5 class="fw-semibold" style="color: #14532d;">Status</h5>
-                            <span class="badge {{ $dataAhliTani->status == 'active' ? 'bg-success' : 'bg-secondary' }} px-3 py-2">{{ ucfirst($dataAhliTani->status) }}</span>
+                            <span class="badge
+                                @if(strtolower($dataAhliTani->status) == 'approved') bg-success
+                                @elseif(strtolower($dataAhliTani->status) == 'reject') bg-danger
+                                @else bg-secondary
+                                @endif px-3 py-2">
+                                {{ ucfirst($dataAhliTani->status) }}
+                            </span>
                         </div>
                         <div class="mb-3">
                             <h5 class="fw-semibold" style="color: #14532d;">Sertifikat</h5>

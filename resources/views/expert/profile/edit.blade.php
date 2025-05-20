@@ -13,14 +13,8 @@
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
-                            <label for="status" class="form-label">Status</label>
-                            <select class="form-control @error('status') is-invalid @enderror" id="status" name="status" required>
-                                <option value="active" {{ old('status', $dataAhliTani->status) == 'active' ? 'selected' : '' }}>Active</option>
-                                <option value="non active" {{ old('status', $dataAhliTani->status) == 'non active' ? 'selected' : '' }}>Non Active</option>
-                            </select>
-                            @error('status')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <label class="form-label">Status</label>
+                            <input type="text" class="form-control" value="{{ $dataAhliTani->status }}" readonly>
                         </div>
 
                         <div class="mb-3">

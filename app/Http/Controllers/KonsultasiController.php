@@ -11,7 +11,7 @@ class KonsultasiController extends Controller
     // Menampilkan halaman pemilihan ahli tani
     public function index()
     {
-        $ahliTaniList = DataAhliTani::all();
+        $ahliTaniList = DataAhliTani::where('status', 'Approved')->get();
         return view('ahli_tani', compact('ahliTaniList'));
     }
 
