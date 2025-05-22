@@ -2,95 +2,82 @@
 
 @section('content')
 <style>
+    body {
+        background: #f8f9fa; /* Light grey background */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+    }
     .success-card {
-        border-radius: 24px;
-        box-shadow: 0 8px 32px rgba(20, 83, 45, 0.18), 0 1.5px 4px rgba(20, 83, 45, 0.10);
-        border: 2px solid #bbf7d0;
-        background: linear-gradient(135deg, rgba(226,244,225,0.85) 0%, rgba(255,255,255,0.85) 100%);
-        /* margin-top: 60px; */
-        animation: zoomIn 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        border-radius: 10px; /* Slightly rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Softer shadow */
+        border: 1px solid #e0e0e0; /* Subtle border */
+        background: #ffffff; /* White background */
+        padding: 30px; /* Adjusted padding */
         position: relative;
-        overflow: visible;
+        overflow: hidden; /* Keep overflow hidden to be safe, though no animation now */
     }
     .center-vertically {
-        min-height: 100vh;
+        min-height: 80vh; /* Adjust if needed, maybe less than 100vh */
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    @keyframes zoomIn {
-        0% {
-            opacity: 0;
-            transform: scale(0.7);
-        }
-        80% {
-            opacity: 1;
-            transform: scale(1.05);
-        }
-        100% {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
-    .confetti {
-        position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        pointer-events: none;
-        z-index: 2;
-    }
     .success-icon {
-        font-size: 4rem;
-        color: #16a34a;
-        margin-bottom: 16px;
+        font-size: 3rem; /* Smaller icon */
+        color: #28a745; /* Bootstrap success green */
+        margin-bottom: 15px;
     }
-    .success-btn {
-        background: linear-gradient(90deg, #16a34a 60%, #22d3ee 100%);
-        border: none;
-        font-weight: 600;
-        border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(20, 83, 45, 0.10);
-        transition: background 0.2s, box-shadow 0.2s;
-        color: #fff;
-    }
-    .success-btn:hover {
-        background: linear-gradient(90deg, #22d3ee 60%, #16a34a 100%);
-        color: #fff;
-    }
+     h2.text-success {
+         color: #28a745 !important; /* Ensure success green */
+         font-size: 1.8rem; /* Slightly smaller heading */
+         font-weight: 600;
+     }
+     .lead.mb-4 {
+         font-size: 1.1rem;
+         color: #555;
+         margin-bottom: 25px !important;
+     }
     .btn-green-muda {
-        background: #6ee7b7;
-        color: #14532d;
+        background: #28a745; /* Solid success green */
+        color: white;
         border: none;
-        font-weight: 600;
-        border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(20, 83, 45, 0.10);
-        transition: background 0.2s, box-shadow 0.2s;
+        font-weight: 500;
+        border-radius: 5px;
+        padding: 10px 24px;
+        transition: background-color 0.2s ease-in-out;
     }
     .btn-green-muda:hover {
-        background: #a7f3d0;
-        color: #14532d;
+        background: #218838; /* Darker green on hover */
+        color: white;
     }
 </style>
 <div class="container center-vertically">
     <div class="row justify-content-center w-100">
         <div class="col-md-8">
             <div class="card text-center success-card">
-                <canvas class="confetti"></canvas>
+                {{-- <canvas class="confetti"></canvas> --}} {{-- Removed animation canvas --}}
                 <div class="card-body py-5">
                     <div class="success-icon mb-3">
                         <i class="bi bi-check-circle-fill"></i>
                     </div>
                     <h2 class="text-success mb-3">Pembayaran Berhasil!</h2>
                     <p class="lead mb-4">Terima kasih, pembayaran konsultasi Anda telah berhasil diproses.<br>Silakan tunggu konfirmasi dari ahli tani.</p>
-                    <a href="{{ route('isi_konsultasi', ['id_ahli_tani' => request()->query('id_ahli_tani'), 'amount' => request()->query('amount')]) }}" class="btn btn-green-muda px-4">Isi Konsultasi</a>
+
+                    {{-- Ensure the route parameters are correctly passed --}}
+                    {{-- Menggunakan parameter dari variabel view --}}
+                    <a href="{{ route('isi_konsultasi', ['id_ahli_tani' => $id_ahli_tani, 'amount' => $amount]) }}" class="btn btn-green-muda px-4">Isi Konsultasi</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script>
+{{-- Removed animation script --}}
+{{-- <script>
 // Confetti simple effect
 function randomColor() {
-    const colors = ['#6ee7b7', '#a7f3d0', '#16a34a', '#bbf7d0', '#facc15'];
+    const colors = ['#6ee7b7', 'a7f3d0', '16a34a', 'bbf7d0', 'facc15'];
     return colors[Math.floor(Math.random() * colors.length)];
 }
 function confetti(canvas) {
@@ -130,5 +117,5 @@ document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.querySelector('.confetti');
     if(canvas) confetti(canvas);
 });
-</script>
+</script> --}}
 @endsection 

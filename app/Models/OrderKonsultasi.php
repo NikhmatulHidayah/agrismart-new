@@ -16,6 +16,7 @@ class OrderKonsultasi extends Model
         'is_payment',
         'amount',
         'question',
+        'description',
         'feedback',
         'picture_feedback',
         'picture_question',

@@ -101,12 +101,8 @@
                         <input type="hidden" name="id_ahli_tani" value="{{ $id_ahli_tani }}">
                         <input type="hidden" name="amount" value="{{ $amount }}">
                         <div class="mb-4">
-                            <label for="topik" class="form-label">Topik Permasalahan</label>
+                            <label for="topik" class="form-label">Kolom Permasalahan</label>
                             <input type="text" class="form-control" id="topik" name="topik" required>
-                        </div>
-                        <div class="mb-4">
-                            <label for="deskripsi" class="form-label">Deskripsi Permasalahan</label>
-                            <textarea class="form-control" id="deskripsi" name="deskripsi" rows="4" required></textarea>
                         </div>
                         <div class="mb-4">
                             <label for="foto" class="form-label">Foto Permasalahan (opsional)</label>

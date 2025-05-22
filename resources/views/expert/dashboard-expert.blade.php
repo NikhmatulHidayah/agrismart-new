@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- Hero Section -->
-<section class="hero position-relative d-flex flex-column justify-content-center align-items-center text-center text-white" style="min-height: 100vh; overflow: hidden;">
+<section class="hero position-relative d-flex flex-column justify-content-center align-items-center text-center text-white" style="overflow: hidden;">
     <!-- Background Gambar dengan Parallax -->
     <div class="hero-bg" style="
         background: url('{{ asset('images/thumb-dashboard.jpg') }}') center center / cover no-repeat;
@@ -67,14 +67,14 @@
                     </div>
                 </div>
             </div> 
-            <!-- Card: Profil Keahlian -->
+            <!-- Card: Konsultasi Masuk -->
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
                 <div class="card shadow-sm border-0 h-100 text-center fitur-card bg-white" style="transition: all 0.3s;">
                     <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                        <img src="https://img.icons8.com/ios-filled/70/14532d/administrator-male.png" alt="Profil Keahlian" width="70" class="mb-4">
-                        <h5 class="card-title fw-bold text-success">Profil Keahlian</h5>
-                        <p class="card-text mt-2">Kelola data keahlian, sertifikat, pengalaman, dan biaya konsultasi Anda.</p>
-                        <a href="{{ route('expert.profile.index') }}" class="btn btn-outline-success rounded-pill mt-3 px-4">Lihat Profil</a>
+                         <img src="https://img.icons8.com/ios-filled/70/14532d/chat.png" alt="Konsultasi Masuk" width="70" class="mb-4">
+                        <h5 class="card-title fw-bold text-success">Konsultasi Masuk</h5>
+                        <p class="card-text mt-2">Lihat dan jawab pertanyaan konsultasi dari petani.</p>
+                        <a href="{{ route('expert.konsultasi.index') }}" class="btn btn-outline-success rounded-pill mt-3 px-4">Lihat Konsultasi</a>
                     </div>
                 </div>
             </div>

@@ -14,6 +14,8 @@
     <!-- AOS Animation CSS -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!-- Custom Global Styles -->
     <style>
@@ -112,7 +114,14 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url('/hama') }}">Hama</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/pemupukan') }}">Pemupukan</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('process.logout') }}">Logout</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Halo, Farmer {{ Auth::user()->name }}</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            @if(Auth::check() && Auth::user()->profile_picture)
+                                <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Foto Profil" class="rounded-circle me-2" style="width: 30px; height: 30px; object-fit: cover;">
+                            @endif
+                            Halo, Farmer {{ Auth::user()->name }}
+                        </a>
+                    </li>
                     
                 </ul>
             </div>
@@ -139,6 +148,34 @@
         once: true,      // animasi hanya sekali scroll
     });
     </script>
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><i class="fas fa-seedling"></i> AgriSmart </h5>
+                    <p>Your smart partner for sustainable agriculture in Indonesia.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <address>
+                        <i class="fas fa-map-marker-alt"></i> Jl. Telekomunikasi No. 1, Bandung Terusan Buahbatu<br>
+                        <i class="fas fa-phone"></i> +6282145772310<br>
+                        <i class="fas fa-envelope"></i> info@agrismart.com
+                    </address>
+                    <div class="social-icons">
+                        <a href="https://wa.me/6282145772310"><i class="fab fa-whatsapp" style="font-size: 30px;"></i></a>
+                        <a href="https://www.instagram.com/aryva_23/"><i class="fab fa-instagram" style="font-size: 30px;"></i></a>
+                        <a href="https://www.linkedin.com/in/muhammad-dhiyaulhaq-aryva/"><i class="fab fa-linkedin" style="font-size: 30px;"></i></a>
+                    </div>                
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2025 AgriSmart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>

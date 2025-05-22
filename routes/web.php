@@ -10,6 +10,7 @@ use App\Http\Controllers\HamaController;
 use App\Http\Controllers\PemupukanController;
 use App\Http\Controllers\KonsultasiController;
 use App\Http\Controllers\DataAhliTaniController;
+use App\Http\Controllers\ExpertKonsultasiController;
 
 Route::get('/login', function () {
     return view('login');
@@ -103,9 +104,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/konsultasi/ahli_tani/{id}', [KonsultasiController::class, 'pilihAhliTani'])->name('konsultasi.pilihAhliTani');
     Route::get('/pembayaran/{id}', [KonsultasiController::class, 'pembayaran'])->name('pembayaran');
     Route::post('/proses-pembayaran', [KonsultasiController::class, 'prosesPembayaran'])->name('proses_pembayaran');
+    Route::get('/konsultasi/saya', [KonsultasiController::class, 'farmerConsultations'])->name('konsultasi.farmer_consultations');
+    Route::get('/konsultasi/saya/{id}', [KonsultasiController::class, 'showFarmerConsultationDetail'])->name('konsultasi.farmer_detail');
 });
-Route::get('/pembayaran-sukses', function () {
-    return view('konsultasi.pembayaran_sukses');
+Route::get('/pembayaran-sukses/{id_ahli_tani}/{amount}', function ($id_ahli_tani, $amount) {
+    return view('konsultasi.pembayaran_sukses', compact('id_ahli_tani', 'amount'));
 })->name('pembayaran_sukses');
 Route::get('/isi-konsultasi', [KonsultasiController::class, 'formKonsultasi'])->name('isi_konsultasi');
 Route::post('/isi-konsultasi', [KonsultasiController::class, 'submitKonsultasi'])->name('submit_konsultasi');
@@ -117,4 +120,7 @@ Route::middleware('auth')->prefix('expert')->name('expert.')->group(function () 
     Route::post('/profile', [DataAhliTaniController::class, 'store'])->name('profile.store');
     Route::get('/profile/edit', [DataAhliTaniController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [DataAhliTaniController::class, 'update'])->name('profile.update');
+    Route::get('/konsultasi', [ExpertKonsultasiController::class, 'index'])->name('konsultasi.index');
+    Route::get('/konsultasi/{id}', [ExpertKonsultasiController::class, 'show'])->name('konsultasi.show');
+    Route::put('/konsultasi/{id}/answer', [ExpertKonsultasiController::class, 'submitAnswer'])->name('konsultasi.submitAnswer');
 });

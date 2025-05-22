@@ -81,7 +81,7 @@
                         <li class="list-group-item"><span class="payment-label">Alumni:</span> {{ $ahliTani->alumni ?? '-' }}</li>
                         <li class="list-group-item"><span class="payment-label">Harga Konsultasi:</span> <span class="payment-amount">Rp {{ number_format($ahliTani->price ?? 0, 0, ',', '.') }}</span></li>
                     </ul>
-                    <form id="formPembayaran">
+                    <form id="formPembayaran" action="{{ route('proses_pembayaran') }}" method="POST">
                         @csrf
                         <input type="hidden" name="ahli_tani_id" value="{{ $ahliTani->id_ahli_tani }}">
                         <input type="hidden" name="jumlah" value="{{ $ahliTani->price ?? 0 }}">
@@ -144,14 +144,19 @@
   </div>
 </div>
 
+@endsection 
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const metode = document.getElementById('metode_pembayaran');
     const qrisSection = document.getElementById('qrisSection');
     const bankSection = document.getElementById('bankSection');
+    const formPembayaran = document.getElementById('formPembayaran');
+    const btnSelesaiPembayaran = document.getElementById('btnSelesaiPembayaran');
+
     if(metode) {
         metode.addEventListener('change', function() {
-            if(this.value === 'gopay' || this.value === 'ovo' || this.value === 'dana' || this.value === 'shopeepay') {
+            if(['gopay', 'ovo', 'dana', 'shopeepay'].includes(this.value)) {
                 qrisSection.style.display = 'block';
                 bankSection.style.display = 'none';
             } else if(this.value) {
@@ -166,19 +171,17 @@ document.addEventListener('DOMContentLoaded', function() {
         metode.dispatchEvent(new Event('change'));
     }
 
-    // Redirect ke halaman sukses setelah klik selesai
-    const btnSelesai = document.getElementById('btnSelesaiPembayaran');
-    if(btnSelesai) {
-        btnSelesai.addEventListener('click', function() {
+    if(btnSelesaiPembayaran && formPembayaran) {
+        btnSelesaiPembayaran.addEventListener('click', function() {
             // Tutup modal
             const modal = bootstrap.Modal.getInstance(document.getElementById('modalPembayaran'));
             modal.hide();
-            // Redirect setelah animasi modal selesai
+            
+            // Submit form pembayaran setelah modal ditutup
             setTimeout(function() {
-                window.location.href = "{{ route('pembayaran_sukses') }}";
-            }, 400);
+                 formPembayaran.submit();
+            }, 400); // Tunggu sedikit agar modal selesai transisi
         });
     }
 });
-</script>
-@endsection 
+</script> 

@@ -14,6 +14,8 @@
     <!-- AOS Animation CSS -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!-- Custom Global Styles -->
     <style>
@@ -96,7 +98,7 @@
     @stack('head') <!-- untuk tambahan css custom di setiap halaman -->
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
@@ -107,8 +109,28 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav gap-3">
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/expert') }}">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('expert.profile.index') }}">Profil</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('process.logout') }}">Logout</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Halo, Expert {{ Auth::user()->name }}</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Halo, Expert {{ Auth::user()->name }}
+                            @if(Auth::check() && Auth::user()->role == 'expert')
+                                @if(Auth::user()->dataAhliTani)
+                                    <span class="badge ms-2
+                                        @if(strtolower(Auth::user()->dataAhliTani->status) == 'approved') bg-success
+                                        @elseif(strtolower(Auth::user()->dataAhliTani->status) == 'reject') bg-danger
+                                        @else bg-secondary
+                                        @endif">
+                                        {{ ucfirst(Auth::user()->dataAhliTani->status) }}
+                                    </span>
+                                @else
+                                    <span class="badge ms-2 bg-secondary">
+                                        Pending
+                                    </span>
+                                @endif
+                            @endif
+                        </a>
+                    </li>
                     
                     
                 </ul>
@@ -117,7 +139,7 @@
     </nav>
 
     <!-- Main Content -->
-    <main>
+    <main class="flex-grow-1">
         @yield('content')
     </main>
 
@@ -136,6 +158,34 @@
         once: true,      // animasi hanya sekali scroll
     });
     </script>
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <div class="row justify-content-start">
+                <div class="col-md-4">
+                    <h5><i class="fas fa-seedling"></i> AgriSmart </h5>
+                    <p>Your smart partner for sustainable agriculture in Indonesia.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <address>
+                        <i class="fas fa-map-marker-alt"></i> Jl. Telekomunikasi No. 1, Bandung Terusan Buahbatu<br>
+                        <i class="fas fa-phone"></i> +6282145772310<br>
+                        <i class="fas fa-envelope"></i> info@agrismart.com
+                    </address>
+                    <div class="social-icons">
+                        <a href="https://wa.me/6282145772310"><i class="fab fa-whatsapp" style="font-size: 30px;"></i></a>
+                        <a href="https://www.instagram.com/aryva_23/"><i class="fab fa-instagram" style="font-size: 30px;"></i></a>
+                        <a href="https://www.linkedin.com/in/muhammad-dhiyaulhaq-aryva/"><i class="fab fa-linkedin" style="font-size: 30px;"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2025 AgriSmart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>

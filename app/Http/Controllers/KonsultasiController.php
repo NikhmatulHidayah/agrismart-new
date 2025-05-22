@@ -13,7 +13,7 @@ class KonsultasiController extends Controller
     // Menampilkan halaman pemilihan ahli tani
     public function index()
     {
-        $ahliTaniList = DataAhliTani::with('user')->get();
+        $ahliTaniList = DataAhliTani::with('user')->where('status', 'Approved')->get();
         return view('konsultasi.ahli_tani', compact('ahliTaniList'));
     }
 
@@ -67,7 +67,7 @@ class KonsultasiController extends Controller
         // Misalnya, kita simpan data pembayaran
         // Pembayaran::create([...]);
 
-        // Redirect ke halaman konfirmasi pembayaran dengan parameter
+        // Redirect ke halaman konfirmasi pembayaran dengan parameter di URL path
         return redirect()->route('pembayaran_sukses', [
             'id_ahli_tani' => $request->ahli_tani_id,
             'amount' => $request->jumlah
@@ -76,16 +76,25 @@ class KonsultasiController extends Controller
 
     public function formKonsultasi(Request $request)
     {
+        // Ambil parameter dari URL query string seperti semula
         $id_ahli_tani = $request->query('id_ahli_tani');
         $amount = $request->query('amount');
-        return view('konsultasi.form_konsultasi', compact('id_ahli_tani', 'amount'));
+
+        // Tambahkan validasi untuk id_ahli_tani
+        if (empty($id_ahli_tani)) {
+             return redirect()->route('konsultasi.index')->with('error', 'Data ahli tani tidak ditemukan untuk konsultasi.');
+        }
+
+        // Ambil data ahli tani untuk ditampilkan di view (opsional, tapi baik untuk konfirmasi)
+        $ahliTaniUser = User::find($id_ahli_tani);
+
+        return view('konsultasi.form_konsultasi', compact('id_ahli_tani', 'amount', 'ahliTaniUser'));
     }
 
     public function submitKonsultasi(Request $request)
     {
         $request->validate([
             'topik' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'id_ahli_tani' => 'required|exists:users,id',
         ]);
@@ -114,5 +123,39 @@ class KonsultasiController extends Controller
     {
         $konsultasi = session('konsultasi');
         return view('konsultasi.konsultasi_sukses', compact('konsultasi'));
+    }
+
+    /**
+     * Menampilkan daftar konsultasi petani.
+     */
+    public function farmerConsultations()
+    {
+        $farmerId = Auth::id();
+        $konsultasis = OrderKonsultasi::where('id_petani', $farmerId)
+                                     ->with('ahliTani')
+                                     ->orderByDesc('created_at')
+                                     ->get();
+
+        return view('konsultasi.farmer_consultations', compact('konsultasis'));
+    }
+
+    /**
+     * Menampilkan halaman detail konsultasi untuk petani.
+     */
+    public function showFarmerConsultationDetail($id)
+    {
+        // Ambil data konsultasi berdasarkan ID dan pastikan milik petani yang sedang login
+        $konsultasi = OrderKonsultasi::where('id', $id)
+                                     ->where('id_petani', Auth::id())
+                                     ->with('ahliTani.dataAhliTani') // Load related expert and their profile data
+                                     ->first();
+
+        // Jika konsultasi tidak ditemukan atau bukan milik petani ini
+        if (!$konsultasi) {
+            return redirect()->route('konsultasi.index')->with('error', 'Konsultasi tidak ditemukan atau Anda tidak memiliki akses.');
+        }
+
+        // Tampilkan view detail konsultasi petani
+        return view('konsultasi.farmer_detail', compact('konsultasi'));
     }
 }
