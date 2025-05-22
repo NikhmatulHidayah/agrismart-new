@@ -26,13 +26,13 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="mb-3">
-                            <label for="price" class="form-label">Biaya Konsultasi</label>
-                            <input type="number" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price') }}" required>
+                        {{-- <div class="mb-3">
+                            <label for="price" class="form-label">Biaya Konsultasi (Rp)</label>
+                            <input type="number" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price') }}" required min="0">
                             @error('price')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                        </div>
+                        </div> --}}
                         <div class="mb-3">
                             <label for="yoe" class="form-label">Pengalaman (Tahun)</label>
                             <input type="number" class="form-control @error('yoe') is-invalid @enderror" id="yoe" name="yoe" value="{{ old('yoe') }}" required>

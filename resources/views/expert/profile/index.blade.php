@@ -67,7 +67,8 @@
                             <h5 class="fw-semibold" style="color: #14532d;">Alumni</h5>
                             <p>{{ $dataAhliTani->alumni }}</p>
                         </div>
-                        <a href="{{ route('expert.profile.edit') }}" class="btn btn-success">Edit Data</a>
+                        {{-- Tombol Edit Data --}}
+                        {{-- <a href="{{ route('expert.profile.edit') }}" class="btn btn-success">Edit Data</a> --}}
                     @else
                         <div class="d-flex justify-content-center align-items-center" style="min-height: 300px;">
                             <div class="card shadow-sm p-4 text-center" style="background: #e0f7fa; border: 1.5px solid #38b6ff; max-width: 400px; margin: auto;">

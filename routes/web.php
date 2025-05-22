@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\ManageExpertController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArticlesController;
+use Illuminate\Auth\Events\Login;
 use App\Http\Controllers\OrderMeetController;
 use App\Http\Controllers\DashboardFarmerController;
 use App\Http\Controllers\DataTanamanController;
@@ -11,6 +14,8 @@ use App\Http\Controllers\PemupukanController;
 use App\Http\Controllers\KonsultasiController;
 use App\Http\Controllers\DataAhliTaniController;
 use App\Http\Controllers\ExpertKonsultasiController;
+
+
 
 Route::get('/login', function () {
     return view('login');
@@ -96,8 +101,42 @@ Route::fallback(function () {
     return redirect('/login');
 });
 
+Route::get('/expert/articles', [ArticlesController::class, 'index']);
+Route::get('/expert/articles/create', [ArticlesController::class, 'create']);
+Route::get('/expert/articles/{id}', [ArticlesController::class, 'show']);
+Route::post('/expert/articles/create/post', [ArticlesController::class, 'postCreateArticle']);
+
+Route::get('/register/expert', [AuthController::class, 'getRegisterExpert']);
+Route::post('/register/expert/post', [AuthController::class, 'PostRegisterExpert']);
+
+Route::get('/register/farmer', [AuthController::class, 'getRegisterfarmer']);
+Route::post('/register/farmer/post', [AuthController::class, 'PostRegisterfarmer']);
+
+Route::get('/admin/login',[LoginController::class, 'showLoginForm']);
+Route::post('/admin/login', [LoginController::class, 'postLogin']);
+
+// Route::get('/admin/dashboard', function () {
+//     return view('admin.dashboard');
+// });
+
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [LoginController::class, 'index'])->name('admin.dashboard');
+    
+    Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
+
+    Route::get('/manage-expert', [ManageExpertController::class, 'manageExpert'])->name('admin.manage-expert');
+    Route::get('/manage-payment', [ManageExpertController::class, 'managePayment'])->name('admin.manage-payment');
+    Route::get('/manage-recap', [ManageExpertController::class, 'manageRecap'])->name('admin.manage-recap');
+
+    Route::get('/experts/{expert}/edit', [ManageExpertController::class, 'edit'])->name('admin.edit-expert');
+    Route::put('/experts/{expert}', [ManageExpertController::class, 'update'])->name('admin.update-expert');
+    Route::put('/experts/{expert}/status', [ManageExpertController::class, 'updateStatus']);
+    Route::delete('/experts/{expert}', [ManageExpertController::class, 'destroy'])->name('admin.delete-expert');
+});
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('process.logout');
+
+
 
 Route::get('/konsultasi', [KonsultasiController::class, 'index'])->name('konsultasi.index');
 Route::middleware('auth')->group(function () {
@@ -118,8 +157,6 @@ Route::middleware('auth')->prefix('expert')->name('expert.')->group(function () 
     Route::get('/profile', [DataAhliTaniController::class, 'index'])->name('profile.index');
     Route::get('/profile/create', [DataAhliTaniController::class, 'create'])->name('profile.create');
     Route::post('/profile', [DataAhliTaniController::class, 'store'])->name('profile.store');
-    Route::get('/profile/edit', [DataAhliTaniController::class, 'edit'])->name('profile.edit');
-    Route::put('/profile', [DataAhliTaniController::class, 'update'])->name('profile.update');
     Route::get('/konsultasi', [ExpertKonsultasiController::class, 'index'])->name('konsultasi.index');
     Route::get('/konsultasi/{id}', [ExpertKonsultasiController::class, 'show'])->name('konsultasi.show');
     Route::put('/konsultasi/{id}/answer', [ExpertKonsultasiController::class, 'submitAnswer'])->name('konsultasi.submitAnswer');

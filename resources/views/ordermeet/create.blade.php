@@ -9,17 +9,26 @@
 
         <div class="mb-3">
             <label for="id_expert" class="form-label">Pilih Ahli Tani</label>
-            <select name="id_expert" id="expert" class="form-select" required>
+            <!-- <select name="id_expert" id="expert" class="form-select" required>
                 <option value="">-- Pilih Ahli Tani --</option>
                 @foreach($expertList as $expert)
                     <option value="{{ $expert->id }}">{{ $expert->name }}</option>
                 @endforeach
+            </select> -->
+
+            <!-- Menampilkan daftar expert yang telah di approved saja -->
+            <select name="id_expert" id="expert" class="form-select" required>                                           
+                <option value="">-- Pilih Ahli Tani --</option>
+                @foreach($expertList as $expert)
+                <option value="{{ $expert->user->id }}" data-price="{{ $expert->price }}">{{ $expert->user->name ?? '-' }}</option>
+                @endforeach
             </select>
+
         </div>
 
         <div class="mb-3">
             <label for="amount" class="form-label">Jumlah Biaya (Rp)</label>
-            <input type="number" class="form-control" name="amount" required min="1">
+            <input type="number" class="form-control" name="amount" id="amount" required min="1" readonly>
         </div>
 
         <div class="mb-3">
@@ -35,4 +44,25 @@
         <button type="submit" class="btn btn-primary">Kirim Permintaan</button>
     </form>
 </div>
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const expertSelect = document.getElementById('expert');
+        const amountInput = document.getElementById('amount');
+
+        expertSelect.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const price = selectedOption.getAttribute('data-price');
+
+            if (price !== null) {
+                amountInput.value = price;
+            } else {
+                amountInput.value = '';
+            }
+        });
+    });
+</script>
+@endpush
+
 @endsection

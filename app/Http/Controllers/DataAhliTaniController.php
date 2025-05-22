@@ -25,7 +25,6 @@ class DataAhliTaniController extends Controller
             'status' => 'required|string',
             'certificate' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'expired_certificate' => 'required|date',
-            'price' => 'required|numeric',
             'yoe' => 'required|integer',
             'alumni' => 'required|string',
         ]);
@@ -34,9 +33,9 @@ class DataAhliTaniController extends Controller
             'id_ahli_tani' => Auth::id(),
             'status' => 'Pending',
             'expired_certificate' => $request->expired_certificate,
-            'price' => $request->price,
             'yoe' => $request->yoe,
             'alumni' => $request->alumni,
+            'price' => 0,
         ];
 
         if ($request->hasFile('certificate')) {
