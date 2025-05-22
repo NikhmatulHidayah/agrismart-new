@@ -1,7 +1,6 @@
 <?php
 
 namespace Database\Seeders;
-
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -10,24 +9,34 @@ class PupukSeeder extends Seeder
 {
     public function run()
     {
-        $tanamans = ['Padi', 'Jagung', 'Tomat'];
-        $tanahs = ['Basah', 'Kering', 'Lembab'];
-        $tahaps = ['Vegetatif', 'Generatif', 'Pembungaan'];
+        DB::table('pupuk')->insert([
+            [ 'jenis_tanaman' => 'Padi', 'kondisi_tanah' => 'Basah', 'tahap_pertumbuhan' => 'Vegetatif', 'rekomendasi' => 'Gunakan pupuk Urea dan SP-36 sebanyak 100 kg/ha.', 'gambar' => 'images/pupuk/pupuk-Urea-dan-SP-36.jpeg', 'created_at' => Carbon::parse('2025-05-05 06:08:00'), 'updated_at' => Carbon::parse('2025-05-05 06:08:00') ],
+            [ 'jenis_tanaman' => 'Padi', 'kondisi_tanah' => 'Kering', 'tahap_pertumbuhan' => 'Generatif', 'rekomendasi' => 'Aplikasikan KCl dan NPK pada akhir fase vegetatif.', 'gambar' => 'images/pupuk/KCl-dan-NPK.jpeg', 'created_at' => Carbon::parse('2025-05-05 06:08:00'), 'updated_at' => Carbon::parse('2025-05-05 06:08:00') ],
+            [ 'jenis_tanaman' => 'Jagung', 'kondisi_tanah' => 'Basah', 'tahap_pertumbuhan' => 'Vegetatif', 'rekomendasi' => 'Gunakan pupuk Urea dan TSP dua kali sebulan.', 'gambar' => 'images/pupuk/pupuk-Urea-dan-TSP.jpeg', 'created_at' => Carbon::parse('2025-05-05 06:08:00'), 'updated_at' => Carbon::parse('2025-05-05 06:08:00') ],
+            [ 'jenis_tanaman' => 'Tomat', 'kondisi_tanah' => 'Lembab', 'tahap_pertumbuhan' => 'Pembungaan', 'rekomendasi' => 'Berikan pupuk NPK dan dolomit untuk memperkuat batang.', 'gambar' => 'images/pupuk/pupuk-NPK-dan-dolomit.jpeg', 'created_at' => Carbon::parse('2025-05-05 06:08:00'), 'updated_at' => Carbon::parse('2025-05-05 06:08:00') ],
 
-        foreach ($tanamans as $tanaman) {
-            foreach ($tanahs as $tanah) {
-                foreach ($tahaps as $tahap) {
-                    DB::table('pupuk')->insert([
-                        'jenis_tanaman' => $tanaman,
-                        'kondisi_tanah' => $tanah,
-                        'tahap_pertumbuhan' => $tahap,
-                        'rekomendasi' => "Gunakan pupuk untuk {$tanaman} di tanah {$tanah} pada tahap {$tahap}.",
-                        'gambar' => 'images/pupuk/default.jpg',
-                        'created_at' => Carbon::now(),
-                        'updated_at' => Carbon::now(),
-                    ]);
-                }
-            }
-        }
+            // Data dari baris 5 sampai 25
+            [ 'jenis_tanaman' => 'Padi', 'kondisi_tanah' => 'Basah', 'tahap_pertumbuhan' => 'Vegetatif', 'rekomendasi' => 'Gunakan pupuk untuk Padi di tanah Basah pada tahap vegetatif.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ],
+            [ 'jenis_tanaman' => 'Padi', 'kondisi_tanah' => 'Basah', 'tahap_pertumbuhan' => 'Generatif', 'rekomendasi' => 'Gunakan pupuk untuk Padi di tanah Basah pada tahap generatif.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ],
+            [ 'jenis_tanaman' => 'Padi', 'kondisi_tanah' => 'Basah', 'tahap_pertumbuhan' => 'Pembungaan', 'rekomendasi' => 'Gunakan pupuk untuk Padi di tanah Basah pada tahap pembungaan.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ],
+            [ 'jenis_tanaman' => 'Padi', 'kondisi_tanah' => 'Kering', 'tahap_pertumbuhan' => 'Vegetatif', 'rekomendasi' => 'Gunakan pupuk untuk Padi di tanah Kering pada tahap vegetatif.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ],
+            [ 'jenis_tanaman' => 'Padi', 'kondisi_tanah' => 'Kering', 'tahap_pertumbuhan' => 'Generatif', 'rekomendasi' => 'Gunakan pupuk untuk Padi di tanah Kering pada tahap generatif.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ],
+            [ 'jenis_tanaman' => 'Padi', 'kondisi_tanah' => 'Kering', 'tahap_pertumbuhan' => 'Pembungaan', 'rekomendasi' => 'Gunakan pupuk untuk Padi di tanah Kering pada tahap pembungaan.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ],
+            [ 'jenis_tanaman' => 'Padi', 'kondisi_tanah' => 'Lembab', 'tahap_pertumbuhan' => 'Vegetatif', 'rekomendasi' => 'Gunakan pupuk untuk Padi di tanah Lembab pada tahap vegetatif.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ],
+            [ 'jenis_tanaman' => 'Padi', 'kondisi_tanah' => 'Lembab', 'tahap_pertumbuhan' => 'Generatif', 'rekomendasi' => 'Gunakan pupuk untuk Padi di tanah Lembab pada tahap generatif.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ],
+            [ 'jenis_tanaman' => 'Padi', 'kondisi_tanah' => 'Lembab', 'tahap_pertumbuhan' => 'Pembungaan', 'rekomendasi' => 'Gunakan pupuk untuk Padi di tanah Lembab pada tahap pembungaan.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ],
+            [ 'jenis_tanaman' => 'Jagung', 'kondisi_tanah' => 'Basah', 'tahap_pertumbuhan' => 'Vegetatif', 'rekomendasi' => 'Gunakan pupuk untuk Jagung di tanah Basah pada tahap vegetatif.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ],
+            [ 'jenis_tanaman' => 'Jagung', 'kondisi_tanah' => 'Basah', 'tahap_pertumbuhan' => 'Generatif', 'rekomendasi' => 'Gunakan pupuk untuk Jagung di tanah Basah pada tahap generatif.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ],
+            [ 'jenis_tanaman' => 'Jagung', 'kondisi_tanah' => 'Basah', 'tahap_pertumbuhan' => 'Pembungaan', 'rekomendasi' => 'Gunakan pupuk untuk Jagung di tanah Basah pada tahap pembungaan.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ],
+            [ 'jenis_tanaman' => 'Jagung', 'kondisi_tanah' => 'Kering', 'tahap_pertumbuhan' => 'Vegetatif', 'rekomendasi' => 'Gunakan pupuk untuk Jagung di tanah Kering pada tahap vegetatif.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ],
+            [ 'jenis_tanaman' => 'Jagung', 'kondisi_tanah' => 'Kering', 'tahap_pertumbuhan' => 'Generatif', 'rekomendasi' => 'Gunakan pupuk untuk Jagung di tanah Kering pada tahap generatif.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ],
+            [ 'jenis_tanaman' => 'Jagung', 'kondisi_tanah' => 'Kering', 'tahap_pertumbuhan' => 'Pembungaan', 'rekomendasi' => 'Gunakan pupuk untuk Jagung di tanah Kering pada tahap pembungaan.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ],
+            [ 'jenis_tanaman' => 'Jagung', 'kondisi_tanah' => 'Lembab', 'tahap_pertumbuhan' => 'Vegetatif', 'rekomendasi' => 'Gunakan pupuk untuk Jagung di tanah Lembab pada tahap vegetatif.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ],
+            [ 'jenis_tanaman' => 'Jagung', 'kondisi_tanah' => 'Lembab', 'tahap_pertumbuhan' => 'Generatif', 'rekomendasi' => 'Gunakan pupuk untuk Jagung di tanah Lembab pada tahap generatif.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ],
+            [ 'jenis_tanaman' => 'Jagung', 'kondisi_tanah' => 'Lembab', 'tahap_pertumbuhan' => 'Pembungaan', 'rekomendasi' => 'Gunakan pupuk untuk Jagung di tanah Lembab pada tahap pembungaan.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ],
+            [ 'jenis_tanaman' => 'Tomat', 'kondisi_tanah' => 'Basah', 'tahap_pertumbuhan' => 'Vegetatif', 'rekomendasi' => 'Gunakan pupuk untuk Tomat di tanah Basah pada tahap vegetatif.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ],
+            [ 'jenis_tanaman' => 'Tomat', 'kondisi_tanah' => 'Basah', 'tahap_pertumbuhan' => 'Generatif', 'rekomendasi' => 'Gunakan pupuk untuk Tomat di tanah Basah pada tahap generatif.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ],
+            [ 'jenis_tanaman' => 'Tomat', 'kondisi_tanah' => 'Basah', 'tahap_pertumbuhan' => 'Pembungaan', 'rekomendasi' => 'Gunakan pupuk untuk Tomat di tanah Basah pada tahap pembungaan.', 'gambar' => 'images/pupuk/default.jpg', 'created_at' => Carbon::parse('2025-05-05 06:30:51'), 'updated_at' => Carbon::parse('2025-05-05 06:30:51') ]
+        ]);
     }
 }
