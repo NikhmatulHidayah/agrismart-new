@@ -67,7 +67,7 @@ Route::get('/select-role', function () {
 });
 
 Route::get('/expert', function () {
-    return view('expert.dashboard');
+    return view('expert.dashboard-expert');
 });
 
 
