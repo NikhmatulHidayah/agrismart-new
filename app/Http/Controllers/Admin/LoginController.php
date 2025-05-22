@@ -38,7 +38,7 @@ class LoginController extends Controller
         $request->session()->invalidate(); // Hapus session
         $request->session()->regenerateToken(); // Regenerate CSRF token
 
-        return redirect('/admin/login'); // Redirect ke halaman login setelah logout
+        return redirect('/login'); // Redirect ke halaman login setelah logout
     }
 
     // public function showManageExpert()
@@ -58,7 +58,7 @@ class LoginController extends Controller
             ->whereHas('user', function ($query) {
                 $query->where('role', 'expert');
             })
-            ->latest()
+            ->oldest()
             ->take(5)
             ->get();
 

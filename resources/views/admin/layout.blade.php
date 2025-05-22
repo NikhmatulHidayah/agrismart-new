@@ -92,6 +92,7 @@
                     <div class="social-icons">
                         <a href="https://wa.me/6282145772310"><i class="fab fa-whatsapp" style="font-size: 30px;"></i></a>
                         <a href="https://www.instagram.com/aryva_23/"><i class="fab fa-instagram" style="font-size: 30px;"></i></a>
+                        <a href="https://www.linkedin.com/in/muhammad-dhiyaulhaq-aryva/"><i class="fab fa-linkedin" style="font-size: 30px;"></i></a>
                     </div>                
                 </div>
             </div>

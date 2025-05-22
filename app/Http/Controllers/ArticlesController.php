@@ -10,16 +10,29 @@ use Illuminate\Support\Facades\Session;
 class ArticlesController extends Controller
 {
     public function index(){
+        $userId = Session::get('user_id');
+        $user = DB::table('users')->where('id', $userId)->first();
+    
+        if (!$user || $user->role != 'expert') {
+            Session::flush();
+            return redirect('/login')->withErrors(['unauthorized' => 'Anda tidak memiliki izin untuk membuat artikel.']);
+        }
         $articles = DB::table('articles')->limit(6)->get();
         return view('expert.articles-main', compact('articles'));
     }
     public function create(){
+        $userId = Session::get('user_id');
+        $user = DB::table('users')->where('id', $userId)->first();
+    
+        if (!$user || $user->role != 'expert') {
+            Session::flush();
+            return redirect('/login')->withErrors(['unauthorized' => 'Anda tidak memiliki izin untuk membuat artikel.']);
+        }
         return view('expert.articles-create');
     }
     public function postCreateArticle(Request $request)
     {
         $userId = Session::get('user_id');
-
         $user = DB::table('users')->where('id', $userId)->first();
     
         if (!$user || $user->role != 'expert') {

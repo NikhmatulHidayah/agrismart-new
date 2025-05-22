@@ -15,6 +15,15 @@
                     <option value="{{ $expert->id }}">{{ $expert->name }}</option>
                 @endforeach
             </select>
+
+            <!-- Menampilkan daftar expert yang telah di approved saja -->
+            <!-- <select name="id_expert" id="expert" class="form-select" required>                                           
+                <option value="">-- Pilih Ahli Tani --</option>
+                @foreach($expertList as $expert)
+                <option value="{{ $expert->id }}">{{ $expert->user->name ?? '-' }}</option>
+                @endforeach
+            </select> -->
+
         </div>
 
         <div class="mb-3">

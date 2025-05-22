@@ -12,6 +12,8 @@ use App\Http\Controllers\DataTanamanController;
 use App\Http\Controllers\HamaController;
 use App\Http\Controllers\PemupukanController;
 
+
+
 Route::get('/login', function () {
     return view('login');
 })->name('login');
@@ -48,7 +50,12 @@ Route::get('/pemupukan', [PemupukanController::class, 'index'])->name('pemupukan
 Route::get('/ordermeet', [OrderMeetController::class, 'index'])->name('ordermeet.index');  // Tanpa middleware 'auth'
 Route::get('/ordermeet/create', [OrderMeetController::class, 'create'])->name('ordermeet.create');  // Tanpa middleware 'auth'
 Route::post('/ordermeet/store', [OrderMeetController::class, 'store'])->name('ordermeet.store');  // Tanpa middleware 'auth'
-    
+    //article
+Route::get('/expert/articles', [ArticlesController::class, 'index']);
+Route::get('/expert/articles/create', [ArticlesController::class, 'create']);
+Route::post('/expert/articles/create/post', [ArticlesController::class, 'postCreateArticle']);
+Route::get('/expert/articles/{id}', [ArticlesController::class, 'show']);
+
 
 // Ahli Tani
 Route::get('expert/ordermeet/manage', [OrderMeetController::class, 'manage'])->name('ordermeet.manage');
@@ -115,7 +122,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
     Route::get('/manage-expert', [ManageExpertController::class, 'manageExpert'])->name('admin.manage-expert');
-    Route::get('/manage-payment', [ManageExpertController::class, 'manageExpert'])->name('admin.manage-payment');
+    Route::get('/manage-payment', [ManageExpertController::class, 'managePayment'])->name('admin.manage-payment');
     Route::get('/manage-recap', [ManageExpertController::class, 'manageRecap'])->name('admin.manage-recap');
 
     Route::get('/experts/{expert}/edit', [ManageExpertController::class, 'edit'])->name('admin.edit-expert');
@@ -125,3 +132,5 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 });
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('process.logout');
+
+

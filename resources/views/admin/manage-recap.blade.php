@@ -8,14 +8,14 @@
 
   <div class="card shadow">
     <div class="card-header bg-primary text-white">
-      <h4 class="mb-0">Expert Applications</h4>
+      <h4 class="mb-0">Farmer Feedbacks</h4>
     </div>
     <div class="card-body">
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>User</th>
-                <th>Avg Rating</th>
+                <th>Rating</th>
                 <th>Feedback</th>
                 <!-- <th>From Farmer</th> -->
             </tr>

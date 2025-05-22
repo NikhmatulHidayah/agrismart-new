@@ -28,8 +28,9 @@ class DataTanamanController extends Controller
      */
     public function index()
     {
-        $tanamans = DataTanaman::where('id_petani', 1)->get(); 
-        // sementara pakai id_petani = 1 karena belum implementasi Auth login
+        // Ambil ID petani dari user yang sedang login
+        $idPetani = Auth::id();
+        $tanamans = DataTanaman::where('id_petani', $idPetani)->get();
         return view('tanaman.index', compact('tanamans'));
     }
 
@@ -59,12 +60,15 @@ class DataTanamanController extends Controller
             $picturePath = $request->file('picture')->store('tanaman', 'public');
         }
 
+        // Ambil ID petani dari user yang sedang login
+        $idPetani = Auth::id();
+
         DataTanaman::create([
             'nama_tanaman' => $request->nama_tanaman,
             'deskripsi' => $request->deskripsi,
             'tanggal_ditanam' => $request->tanggal_ditanam,
             'picture' => $picturePath,
-            'id_petani' => 1, // hardcode sementara
+            'id_petani' => $idPetani, // Gunakan ID petani yang login
         ]);
 
         return redirect()->route('tanaman.index')->with('success', 'Data tanaman berhasil ditambahkan.');
@@ -76,6 +80,12 @@ class DataTanamanController extends Controller
     public function edit($id)
     {
         $tanaman = DataTanaman::findOrFail($id);
+
+        // Pastikan petani yang login adalah pemilik tanaman ini
+        if ($tanaman->id_petani != Auth::id()) {
+            return redirect()->route('tanaman.index')->with('error', 'Anda tidak memiliki izin untuk mengedit tanaman ini.');
+        }
+
         $tanamanList = array_keys(self::getPredictionMapping());
         return view('tanaman.edit', compact('tanaman', 'tanamanList'));
     }
@@ -93,6 +103,11 @@ class DataTanamanController extends Controller
         ]);
 
         $tanaman = DataTanaman::findOrFail($id);
+
+        // Pastikan petani yang login adalah pemilik tanaman ini
+        if ($tanaman->id_petani != Auth::id()) {
+            return redirect()->route('tanaman.index')->with('error', 'Anda tidak memiliki izin untuk mengedit tanaman ini.');
+        }
 
         $picturePath = $tanaman->picture;
         if ($request->hasFile('picture')) {
@@ -119,6 +134,11 @@ class DataTanamanController extends Controller
     public function destroy($id)
     {
         $tanaman = DataTanaman::findOrFail($id);
+
+        // Pastikan petani yang login adalah pemilik tanaman ini
+        if ($tanaman->id_petani != Auth::id()) {
+            return redirect()->route('tanaman.index')->with('error', 'Anda tidak memiliki izin untuk menghapus tanaman ini.');
+        }
 
         if ($tanaman->picture) {
             Storage::disk('public')->delete($tanaman->picture);

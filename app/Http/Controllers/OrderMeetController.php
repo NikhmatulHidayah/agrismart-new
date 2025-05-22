@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\OrderMeet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\DataAhliTani;
 
 class OrderMeetController extends Controller
 {
     // Petani: lihat daftar order mereka
     public function index()
     {
-        $orders = OrderMeet::with('expert')
-            ->where('id_petani', Auth::id())
-            ->latest()
+        $orders = DB::table('order_meet')
+            ->join('users', 'order_meet.id_ahli_tani', '=', 'users.id')
+            ->where('order_meet.id_petani', Auth::id())
+            ->select('order_meet.*', 'users.name as ahli_name')
+            ->orderByDesc('order_meet.created_at')
             ->get();
-            
+
         return view('ordermeet.index', compact('orders'));
     }
 
@@ -28,19 +32,33 @@ class OrderMeetController extends Controller
         return view('ordermeet.create', compact('expertList'));
     }
 
+
+    // Menampilkan expert yang telah di approve saja
+    // public function create()
+    // {
+    //     // Ambil ahli tani yang statusnya approved, sekaligus ambil data usernya
+    //     $expertList = DataAhliTani::with('user')
+    //         ->where('status', 'Approved')
+    //         ->get();
+
+    //     return view('ordermeet.create', compact('expertList'));
+    // }
+
+
     // Petani: simpan order meet
     public function store(Request $request)
     {
         $request->validate([
-            'id_expert' => 'required|exists:users,id',
+            'id_expert' => 'required',
             'amount' => 'required|integer|min:1',
             'topic' => 'nullable|string|max:255',
             'date' => 'required|date',
         ]);
+        //dd($request->id_expert);
 
         OrderMeet::create([
             'id_petani' => Auth::id(),
-            'id_expert' => $request->id_expert,
+            'id_ahli_tani' => $request->id_expert,
             'amount' => $request->amount,
             'topic' => $request->topic,
             'date' => $request->date,
@@ -57,7 +75,7 @@ class OrderMeetController extends Controller
     public function manage()
     {
         $orders = OrderMeet::with('petani')
-            ->where('id_expert', Auth::id())
+            ->where('id_ahli_tani', Auth::id())
             ->latest()
             ->get();
 
@@ -72,7 +90,7 @@ class OrderMeetController extends Controller
         ]);
 
         $order = OrderMeet::where('id', $id)
-            ->where('id_expert', Auth::id())
+            ->where('id_ahli_tani', Auth::id())
             ->firstOrFail();
 
         $order->update([

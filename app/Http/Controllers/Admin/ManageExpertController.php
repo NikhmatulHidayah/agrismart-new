@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DataAhliTani;
+use App\Models\OrderMeet;
 use App\Models\User;
 
 class ManageExpertController extends Controller
@@ -14,7 +15,7 @@ class ManageExpertController extends Controller
     public function manageExpert()
     {
         $experts = DataAhliTani::with('user')
-            ->latest()
+            ->oldest()
             ->get();
 
         return view('admin.manage-expert', compact('experts'));
@@ -38,22 +39,22 @@ class ManageExpertController extends Controller
     // Delete expert
 
     public function destroy(DataAhliTani $expert)
-{
-    try {
-        // Hapus user terkait
-        $user = $expert->user;
-        if ($user) {
-            $user->delete();
+    {
+        try {
+            // Hapus user terkait
+            $user = $expert->user;
+            if ($user) {
+                $user->delete();
+            }
+
+            // Hapus data ahli tani
+            $expert->delete();
+
+            return response()->json(['message' => 'Expert and associated user deleted successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Failed to delete expert and associated user'], 500);
         }
-
-        // Hapus data ahli tani
-        $expert->delete();
-
-        return response()->json(['message' => 'Expert and associated user deleted successfully']);
-    } catch (\Exception $e) {
-        return response()->json(['message' => 'Failed to delete expert and associated user'], 500);
     }
-}
 
 
     // edit expert
@@ -80,17 +81,42 @@ class ManageExpertController extends Controller
     public function manageRecap()
     {
         $experts = User::where('role', 'expert')
+            ->whereHas('dataAhliTani', function ($query) {
+                $query->where('status', 'approved');
+            })
             ->withAvg('ratingsAsAhli as average_rating', 'star')
-            ->with(['ratingsAsAhli' => function($query) {
+            ->with(['ratingsAsAhli' => function ($query) {
                 $query->with('petani')
-                      ->whereNotNull('feedback');
-                      // Hapus `latest()` atau ganti dengan kolom yang ada
-                      // Contoh alternatif: ->orderBy('id', 'desc') 
+                    ->whereNotNull('feedback');
+                // Hapus `latest()` atau ganti dengan kolom yang ada
+                // Contoh alternatif: ->orderBy('id', 'desc') 
             }])
             ->get();
-    
+
         return view('admin.manage-recap', compact('experts'));
     }
-    
 
+    public function managePayment()
+    {
+        $paymentsKonsultasi = OrderMeet::with('petani')
+            // ->where('is_payment', true)
+            ->get();
+        
+        $paymentsKonsultasi->each(function ($item) {
+            $item->type = 'Konsultasi';
+        });
+
+        $paymentsMeet = OrderMeet::with('petani')
+            // ->where('is_payment', true)
+            ->get();
+        $paymentsMeet->each(function ($item) {
+            $item->type = 'Meet';
+        });
+
+        $payments = $paymentsKonsultasi->merge($paymentsMeet);
+
+        $payments = $payments->sortByDesc('created_at')->values();
+
+        return view('admin.manage-payment', compact('payments'));
+    }
 }
