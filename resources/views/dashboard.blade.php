@@ -91,8 +91,19 @@
                         <a href="{{ route('ordermeet.index') }}" class="btn btn-outline-success rounded-pill mt-3 px-4">Lihat</a>
                     </div>
                 </div>
-            </div> 
+            </div>
 
+            <!-- Card 5: Konsultasi -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+                <div class="card shadow-sm border-0 h-100 text-center fitur-card bg-white" style="transition: all 0.3s;">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                        <img src="{{ asset('images/icons/konsultasi.jpeg') }}" alt="Konsultasi" width="70" class="mb-4">
+                        <h5 class="card-title fw-bold text-info">Konsultasi</h5>
+                        <p class="card-text mt-2">Bingung dengan tanaman atau hama? Konsultasikan langsung dengan ahli kami!</p>
+                        <a href="{{ url('/konsultasi') }}" class="btn btn-outline-info rounded-pill mt-3 px-4">Konsultasi</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>

@@ -8,6 +8,8 @@ use App\Http\Controllers\DashboardFarmerController;
 use App\Http\Controllers\DataTanamanController;
 use App\Http\Controllers\HamaController;
 use App\Http\Controllers\PemupukanController;
+use App\Http\Controllers\KonsultasiController;
+use App\Http\Controllers\DataAhliTaniController;
 
 Route::get('/login', function () {
     return view('login');
@@ -95,3 +97,24 @@ Route::fallback(function () {
 
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('process.logout');
+
+Route::get('/konsultasi', [KonsultasiController::class, 'index'])->name('konsultasi.index');
+Route::middleware('auth')->group(function () {
+    Route::get('/konsultasi/ahli_tani/{id}', [KonsultasiController::class, 'pilihAhliTani'])->name('konsultasi.pilihAhliTani');
+    Route::get('/pembayaran/{id}', [KonsultasiController::class, 'pembayaran'])->name('pembayaran');
+    Route::post('/proses-pembayaran', [KonsultasiController::class, 'prosesPembayaran'])->name('proses_pembayaran');
+});
+Route::get('/pembayaran-sukses', function () {
+    return view('konsultasi.pembayaran_sukses');
+})->name('pembayaran_sukses');
+Route::get('/isi-konsultasi', [KonsultasiController::class, 'formKonsultasi'])->name('isi_konsultasi');
+Route::post('/isi-konsultasi', [KonsultasiController::class, 'submitKonsultasi'])->name('submit_konsultasi');
+Route::get('/konsultasi-sukses', [KonsultasiController::class, 'konsultasiSukses'])->name('konsultasi_sukses');
+
+Route::middleware('auth')->prefix('expert')->name('expert.')->group(function () {
+    Route::get('/profile', [DataAhliTaniController::class, 'index'])->name('profile.index');
+    Route::get('/profile/create', [DataAhliTaniController::class, 'create'])->name('profile.create');
+    Route::post('/profile', [DataAhliTaniController::class, 'store'])->name('profile.store');
+    Route::get('/profile/edit', [DataAhliTaniController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [DataAhliTaniController::class, 'update'])->name('profile.update');
+});
