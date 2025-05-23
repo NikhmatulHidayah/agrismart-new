@@ -26,12 +26,28 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Navbar */
         nav.navbar {
             background: rgba(25, 135, 84, 0.85); /* hijau transparan */
             backdrop-filter: blur(8px);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1 0 auto;
+            padding-top: 76px; /* Add padding to account for fixed navbar */
+        }
+
+        /* Footer */
+        .footer {
+            flex-shrink: 0;
+            background-color: #f8f9fa;
+            padding: 2rem 0;
+            margin-top: auto;
         }
 
         /* Hero Section */
@@ -133,23 +149,8 @@
         @yield('content')
     </main>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-    @stack('scripts')
-
-    <!-- AOS Animation JS -->
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script>
-    AOS.init({
-        duration: 800,   // durasi animasi
-        once: true,      // animasi hanya sekali scroll
-    });
-    </script>
-
-    <footer class="footer mt-auto py-3 bg-light">
+    <!-- Footer -->
+    <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -176,6 +177,22 @@
             </div>
         </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    @stack('scripts')
+
+    <!-- AOS Animation JS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+    AOS.init({
+        duration: 800,   // durasi animasi
+        once: true,      // animasi hanya sekali scroll
+    });
+    </script>
 
 </body>
 </html>

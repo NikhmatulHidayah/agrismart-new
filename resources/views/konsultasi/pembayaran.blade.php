@@ -89,12 +89,7 @@
                             <label for="metode_pembayaran" class="form-label payment-label">Metode Pembayaran</label>
                             <select class="form-select mb-2" id="metode_pembayaran" name="metode_pembayaran" required>
                                 <option value="">Pilih Metode</option>
-                                <optgroup label="Transfer Bank">
-                                    <option value="bca">BCA</option>
-                                    <option value="bni">BNI</option>
-                                    <option value="bri">BRI</option>
-                                    <option value="mandiri">Mandiri</option>
-                                </optgroup>
+                                
                                 <optgroup label="E-Wallet">
                                     <option value="gopay">GoPay (QRIS)</option>
                                     <option value="ovo">OVO (QRIS)</option>
@@ -159,10 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if(['gopay', 'ovo', 'dana', 'shopeepay'].includes(this.value)) {
                 qrisSection.style.display = 'block';
                 bankSection.style.display = 'none';
-            } else if(this.value) {
-                qrisSection.style.display = 'none';
-                bankSection.style.display = 'block';
-            } else {
+            }  else {
                 qrisSection.style.display = 'none';
                 bankSection.style.display = 'none';
             }

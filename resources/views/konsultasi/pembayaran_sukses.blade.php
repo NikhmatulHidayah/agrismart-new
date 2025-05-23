@@ -10,13 +10,18 @@
         min-height: 100vh;
     }
     .success-card {
-        border-radius: 10px; /* Slightly rounded corners */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Softer shadow */
-        border: 1px solid #e0e0e0; /* Subtle border */
-        background: #ffffff; /* White background */
+        border-radius: 15px; /* Slightly rounded corners */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.1);
+        border: none; /* Remove subtle border */
+        background: rgba(255, 255, 255, 0.9); /* White background with 90% opacity */
         padding: 30px; /* Adjusted padding */
         position: relative;
-        overflow: hidden; /* Keep overflow hidden to be safe, though no animation now */
+        overflow: hidden; /* Keep overflow hidden to be safe */
+        transition: transform 0.3s ease-in-out;
+    }
+    .success-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 10px 10px rgba(0, 0, 0, 0.2);
     }
     .center-vertically {
         min-height: 80vh; /* Adjust if needed, maybe less than 100vh */
