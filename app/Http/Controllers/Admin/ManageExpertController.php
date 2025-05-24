@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DataAhliTani;
+use App\Models\OrderKonsultasi;
 use App\Models\OrderMeet;
 use App\Models\User;
 
@@ -98,7 +99,7 @@ class ManageExpertController extends Controller
 
     public function managePayment()
     {
-        $paymentsKonsultasi = OrderMeet::with('petani')
+        $paymentsKonsultasi = OrderKonsultasi::with('petani')
             // ->where('is_payment', true)
             ->get();
         
