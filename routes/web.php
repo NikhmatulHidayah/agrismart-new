@@ -14,6 +14,7 @@ use App\Http\Controllers\PemupukanController;
 use App\Http\Controllers\KonsultasiController;
 use App\Http\Controllers\DataAhliTaniController;
 use App\Http\Controllers\ExpertKonsultasiController;
+use App\Http\Controllers\RatingController;
 
 
 
@@ -139,7 +140,6 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 Route::get('/logout', [AuthController::class, 'logout'])->name('process.logout');
 
 
-
 Route::get('/konsultasi', [KonsultasiController::class, 'index'])->name('konsultasi.index');
 Route::middleware('auth')->group(function () {
     Route::get('/konsultasi/ahli_tani/{id}', [KonsultasiController::class, 'pilihAhliTani'])->name('konsultasi.pilihAhliTani');
@@ -163,3 +163,7 @@ Route::middleware('auth')->prefix('expert')->name('expert.')->group(function () 
     Route::get('/konsultasi/{id}', [ExpertKonsultasiController::class, 'show'])->name('konsultasi.show');
     Route::put('/konsultasi/{id}/answer', [ExpertKonsultasiController::class, 'submitAnswer'])->name('konsultasi.submitAnswer');
 });
+
+
+Route::post('/ordermeet/{id}/done', [OrderMeetController::class, 'markAsDone'])->name('ordermeet.done');
+Route::post('/rating/store', [RatingController::class, 'store'])->name('rating.store');

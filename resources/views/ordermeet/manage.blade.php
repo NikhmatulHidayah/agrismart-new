@@ -34,7 +34,9 @@
                         @endif
                     </td>
                     <td>
-                        @if($order->is_confirmation)
+                        @if($order->is_done)
+                            <span class="badge bg-secondary">Selesai</span>
+                        @elseif($order->is_confirmation)
                             <span class="badge bg-success">Terkonfirmasi</span>
                         @else
                             <span class="badge bg-warning text-dark">Menunggu</span>
@@ -42,13 +44,22 @@
                     </td>
                     <td>
                         @if(!$order->is_confirmation)
-                        <form method="POST" action="{{ route('ordermeet.confirm', $order->id) }}">
-                            @csrf
-                            <input type="url" name="link_meet" class="form-control mb-2" placeholder="Link Meet" required>
-                            <button type="submit" class="btn btn-sm btn-primary">Konfirmasi</button>
-                        </form>
+                            {{-- Form Konfirmasi --}}
+                            <form method="POST" action="{{ route('ordermeet.confirm', $order->id) }}">
+                                @csrf
+                                <input type="url" name="link_meet" class="form-control mb-2" placeholder="Link Meet" required>
+                                <button type="submit" class="btn btn-sm btn-primary">Konfirmasi</button>
+                            </form>
                         @else
-                            <span class="text-muted">Sudah Dikonfirmasi</span>
+                            @if(!$order->is_done)
+                                {{-- Tombol Selesaikan --}}
+                                <form method="POST" action="{{ route('ordermeet.done', $order->id) }}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-outline-secondary">Selesaikan</button>
+                                </form>
+                            @else
+                                <span class="text-muted">Sudah Selesai</span>
+                            @endif
                         @endif
                     </td>
                 </tr>

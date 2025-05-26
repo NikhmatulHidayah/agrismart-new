@@ -13,6 +13,7 @@ class OrderMeetController extends Controller
     // Petani: lihat daftar order mereka
     public function index()
     {
+        //dd("puki");
         $orders = DB::table('order_meet')
             ->join('users', 'order_meet.id_ahli_tani', '=', 'users.id')
             ->where('order_meet.id_petani', Auth::id())
@@ -20,12 +21,14 @@ class OrderMeetController extends Controller
             ->orderByDesc('order_meet.created_at')
             ->get();
 
+        //dd($orders);
         return view('ordermeet.index', compact('orders'));
     }
 
     // Petani: form buat order meet
     public function create()
     {
+        //dd('puki');
         // Ambil ahli tani yang statusnya approved, sekaligus ambil data usernya
         $expertList = DataAhliTani::with('user')
             ->where('status', 'Approved')
@@ -115,5 +118,14 @@ class OrderMeetController extends Controller
         ]);
 
         return back()->with('success', 'Pertemuan telah dikonfirmasi.');
+    }
+
+    public function markAsDone($id)
+    {
+        $order = OrderMeet::findOrFail($id);
+        $order->is_done = 1;
+        $order->save();
+
+        return back()->with('success', 'Order berhasil diselesaikan.');
     }
 }

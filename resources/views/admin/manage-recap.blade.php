@@ -40,10 +40,6 @@
                     @forelse($expert->ratingsAsAhli as $rating)
                         <div class="mb-2 p-2 bg-light rounded">
                             <small>{{ $rating->feedback }}</small>
-                            <br>
-                            <small class="text-muted">
-                            {{ optional($rating->created_at)->format('d M Y') ?? '-' }}
-                            </small>
                         </div>
                     @empty
                         <span class="text-muted">No feedback yet</span>
