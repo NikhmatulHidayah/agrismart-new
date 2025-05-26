@@ -99,25 +99,18 @@ class ManageExpertController extends Controller
 
     public function managePayment()
     {
-        $paymentsKonsultasi = OrderKonsultasi::with('petani')
-            // ->where('is_payment', true)
-            ->get();
-        
-        $paymentsKonsultasi->each(function ($item) {
-            $item->type = 'Konsultasi';
-        });
+        $paymentsKonsultasi = OrderKonsultasi::with('petani')->get()
+            ->each(fn($p) => $p->type = 'Konsultasi');
 
-        $paymentsMeet = OrderMeet::with('petani')
-            // ->where('is_payment', true)
-            ->get();
-        $paymentsMeet->each(function ($item) {
-            $item->type = 'Meet';
-        });
+        $paymentsMeet = OrderMeet::with('petani')->get()
+            ->each(fn($p) => $p->type = 'Meet');
 
-        $payments = $paymentsKonsultasi->merge($paymentsMeet);
-
-        $payments = $payments->sortByDesc('created_at')->values();
+        // gabungkan tanpa bentrok key
+        $payments = $paymentsKonsultasi
+            ->concat($paymentsMeet)
+            ->sortByDesc('created_at')
+            ->values();
 
         return view('admin.manage-payment', compact('payments'));
-    }
+}
 }
