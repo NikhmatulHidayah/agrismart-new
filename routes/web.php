@@ -53,6 +53,8 @@ Route::get('/pemupukan', [PemupukanController::class, 'index'])->name('pemupukan
 Route::get('/ordermeet', [OrderMeetController::class, 'index'])->name('ordermeet.index');  // Tanpa middleware 'auth'
 Route::get('/ordermeet/create', [OrderMeetController::class, 'create'])->name('ordermeet.create');  // Tanpa middleware 'auth'
 Route::post('/ordermeet/store', [OrderMeetController::class, 'store'])->name('ordermeet.store');  // Tanpa middleware 'auth'
+Route::post('/ordermeet/process-payment', [OrderMeetController::class, 'processPayment'])->name('ordermeet.process_payment');
+Route::get('/ordermeet/payment-success', [OrderMeetController::class, 'paymentSuccess'])->name('ordermeet.payment_success');
     //article
 Route::get('/expert/articles', [ArticlesController::class, 'index']);
 Route::get('/expert/articles/create', [ArticlesController::class, 'create']);

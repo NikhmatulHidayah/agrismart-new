@@ -24,16 +24,6 @@ class OrderMeetController extends Controller
     }
 
     // Petani: form buat order meet
-    // public function create()
-    // {
-    //     // Kamu bisa ambil daftar ahli tani dari database untuk dropdown
-    //     $expertList = \App\Models\User::where('role', 'expert')->get();
-
-    //     return view('ordermeet.create', compact('expertList'));
-    // }
-
-
-    // Menampilkan expert yang telah di approve saja
     public function create()
     {
         // Ambil ahli tani yang statusnya approved, sekaligus ambil data usernya
@@ -44,7 +34,6 @@ class OrderMeetController extends Controller
         return view('ordermeet.create', compact('expertList'));
     }
 
-
     // Petani: simpan order meet
     public function store(Request $request)
     {
@@ -54,7 +43,28 @@ class OrderMeetController extends Controller
             'topic' => 'nullable|string|max:255',
             'date' => 'required|date',
         ]);
-        //dd($request->id_expert);
+
+        // Redirect to payment page with the order details
+        $expert = DataAhliTani::with('user')->where('id_ahli_tani', $request->id_expert)->first();
+        
+        return view('ordermeet.payment', [
+            'expert' => $expert->user,
+            'amount' => $request->amount,
+            'date' => $request->date,
+            'topic' => $request->topic ?? '-'
+        ]);
+    }
+
+    // Process payment and create order
+    public function processPayment(Request $request)
+    {
+        $request->validate([
+            'id_expert' => 'required',
+            'amount' => 'required|integer|min:1',
+            'date' => 'required|date',
+            'topic' => 'nullable|string|max:255',
+            'metode_pembayaran' => 'required|string',
+        ]);
 
         OrderMeet::create([
             'id_petani' => Auth::id(),
@@ -62,13 +72,19 @@ class OrderMeetController extends Controller
             'amount' => $request->amount,
             'topic' => $request->topic,
             'date' => $request->date,
-            'is_payment' => false,
+            'is_payment' => true, // Set payment status to true since payment is done
             'is_done' => false,
             'is_confirmation' => false,
             'payment_ahli' => false,
         ]);
 
-        return redirect()->route('ordermeet.index')->with('success', 'Permintaan pertemuan berhasil dibuat.');
+        return redirect()->route('ordermeet.payment_success');
+    }
+
+    // Show payment success page
+    public function paymentSuccess()
+    {
+        return view('ordermeet.payment_success');
     }
 
     // Ahli Tani: lihat dan kelola order meet yang ditujukan kepadanya
