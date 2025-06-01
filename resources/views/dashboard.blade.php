@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <!-- Hero Section -->
 <section class="hero position-relative d-flex flex-column justify-content-center align-items-center text-center text-white" style="min-height: 100vh; overflow: hidden;">
     <!-- Background Gambar dengan Parallax -->
@@ -11,8 +10,8 @@
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
         z-index: 1;
-        background-attachment: fixed;
-    "></div>
+        background-attachment: fixed;">
+    </div>
 
     <!-- Gradient Layer -->
     <div style="
@@ -35,6 +34,36 @@
             <a href="#fitur" class="btn btn-light btn-lg px-5 py-3 fw-semibold rounded-pill shadow-sm scroll-smooth" style="transition: all 0.3s ease;">
                 Jelajahi Fitur
             </a>
+        </div>
+    </div>
+</section>
+
+<section style="background-color: #e9f7ef;">
+    <br><br><br>
+
+    <div class="container">
+        <div class="slider-container">
+            <button class="slider-button left" onclick="moveSlider(-1)">&#60;</button>
+            
+            <div class="slider">
+                @foreach($articles as $article)
+                    <a href="{{ route('articles.show', $article->id) }}" class="slider-box" style="text-decoration: none;">
+                        <div class="slider-image">
+                            @if($article->picture)
+                                <img src="{{ asset('storage/' . $article->picture) }}" alt="{{ $article->title }}" width="100%" style="object-fit: cover;">
+                            @else
+                                <p>No image</p>
+                            @endif
+                        </div>
+
+                        <div class="slider-title">
+                            <h4 style="text-decoration:none; color:black;">{{ $article->title }}</h4>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+
+            <button class="slider-button right" onclick="moveSlider(1)">&#62;</button>
         </div>
     </div>
 </section>
@@ -110,27 +139,84 @@
 
 <!-- CSS Tambahan -->
 <style>
-    .fitur-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 12px 24px rgba(21, 84, 42, 0.25);
+    .slider-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
     }
-    .btn:hover {
-        transform: scale(1.05);
-    }
-    html {
+
+    .slider {
+        display: flex;
         scroll-behavior: smooth;
+        overflow-x: auto;
+        width: 100%;
+        scroll-snap-type: x mandatory;
+    }
+
+    .slider-box {
+        background-color: white;
+        height: 200px;
+        width: 350px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin: 10px;
+        flex-shrink: 0;
+        scroll-snap-align: start;
+        text-decoration: none; 
+    }
+
+    .slider-image {
+        width: 100%;
+        height: 70%;
+        padding: 0;
+        margin-bottom: 10px;
+    }
+
+    .slider-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .slider-title {
+        width: 100%;
+        text-align: left; 
+    }
+
+    .slider h4 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .slider p {
+        font-size: 0.9rem;
+    }
+
+    .slider-button {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
     }
 </style>
 
-<!-- Tambahkan AOS.js -->
 @push('scripts')
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script>
-    AOS.init({
-        duration: 1000,
-        once: true,
-    });
-</script>
+    <script>
+        function moveSlider(direction) {
+            const slider = document.querySelector('.slider');
+            const scrollAmount = 350;
+            slider.scrollBy(direction * scrollAmount, 0);
+        }
+
+    </script>
 @endpush
 
 @endsection
