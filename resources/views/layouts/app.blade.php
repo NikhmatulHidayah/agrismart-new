@@ -17,6 +17,7 @@
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
+
     <!-- Custom Global Styles -->
     <style>
         /* Reset */
@@ -109,6 +110,7 @@
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
+
     </style>
 
     @stack('head') <!-- untuk tambahan css custom di setiap halaman -->
@@ -189,8 +191,8 @@
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
     AOS.init({
-        duration: 800,   // durasi animasi
-        once: true,      // animasi hanya sekali scroll
+        duration: 800,   
+        once: true,      
     });
     </script>
 
