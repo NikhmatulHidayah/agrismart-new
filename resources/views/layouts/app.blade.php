@@ -133,14 +133,14 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url('/pemupukan') }}">Pemupukan</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('process.logout') }}">Logout</a></li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            @if(Auth::check() && Auth::user()->profile_picture)
-                                <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Foto Profil" class="rounded-circle me-2" style="width: 30px; height: 30px; object-fit: cover;">
-                            @endif
+                        <a class="nav-link" href="">
                             Halo, Farmer {{ Auth::user()->name }}
+                            &nbsp
+                            @if(Auth::check() && Auth::user()->picture)
+                                <img src="{{ asset('storage/' . Auth::user()->picture) }}" alt="Foto Profil" class="rounded-circle me-2" style="width: 30px; height: 30px; object-fit: cover;">
+                            @endif
                         </a>
                     </li>
-                    
                 </ul>
             </div>
         </div>
