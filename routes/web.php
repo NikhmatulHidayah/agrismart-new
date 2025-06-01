@@ -15,6 +15,7 @@ use App\Http\Controllers\KonsultasiController;
 use App\Http\Controllers\DataAhliTaniController;
 use App\Http\Controllers\ExpertKonsultasiController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\farmerController;
 
 
 
@@ -45,9 +46,11 @@ Route::get('/login', function () {
 // Route::post('/ahliTani/finish-order/{id}', [AhliOrderMeetController::class, 'finishOrder'])->name('ahli.finishOrder');
 
     // Petani
-    Route::get('login/farmer/dashboard', function () {
-        return view('dashboard'); // Pastikan kamu memiliki view dashboard.blade.php
-    })->name('dashboard.farmer');  // Tanpa middleware 'auth'
+
+Route::get('login/farmer/dashboard', [farmerController::class, 'dashboard'])->name('dashboard.farmer');
+Route::get('/article/{id}', [farmerController::class, 'show'])->name('articles.show');
+
+
 Route::resource('tanaman', DataTanamanController::class); 
 Route::get('/hama', [HamaController::class, 'index'])->name('hama.index');
 Route::get('/pemupukan', [PemupukanController::class, 'index'])->name('pemupukan.index');
