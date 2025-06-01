@@ -22,31 +22,31 @@
         <h2>Join Us!</h2>
         <p>To begin this journey, tell us what type of account you’d be opening.</p>
 
-        <div class="card selected">
-          <div class="icon-box">
-            <a href="/register/farmer">
-              <img src="{{ asset('image/user.png') }}" alt="">
-            </a>
-          </div>
-          <div class="card-content">
-            <h4>Farm or plant enthusiasts</h4>
-            <p>Personal account to manage all your activities.</p>
-          </div>
-          <div class="arrow">→</div>
+<a href="/register/farmer">
+    <div class="card" style="text-decoration: none;">
+        <div class="icon-box">
+            <img src="{{ asset('image/user.png') }}" alt="">
         </div>
+        <div class="card-content">
+            <h4 style="text-decoration: none;">Farm or plant enthusiasts</h4>
+            <p style="text-decoration: none;">Personal account to manage all your activities.</p>
+        </div>
+        <div class="arrow" style="text-decoration: none;">→</div>
+    </div>
+</a>
 
-        <div class="card">
-          <div class="icon-box">
-            <a href="/register/expert">
-              <img src="{{ asset('image/farm.png') }}" alt="">
-            </a>
-          </div>
-          <div class="card-content">
-            <h4>Agricultural expert</h4>
-            <p>Own or belong to a company, this is for you.</p>
-          </div>
-          <div class="arrow">→</div>
+<a href="/register/expert">
+    <div class="card" style="text-decoration: none;">
+        <div class="icon-box">
+            <img src="{{ asset('image/farm.png') }}" alt="">
         </div>
+        <div class="card-content">
+            <h4 style="text-decoration: none;">Agricultural expert</h4>
+            <p style="text-decoration: none;">Own or belong to a company, this is for you.</p>
+        </div>
+        <div class="arrow" style="text-decoration: none;">→</div>
+    </div>
+</a>
 
         <div class="card">
         
