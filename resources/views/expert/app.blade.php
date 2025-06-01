@@ -129,6 +129,10 @@
                                     </span>
                                 @endif
                             @endif
+                            &nbsp
+                            @if(Auth::check() && Auth::user()->picture)
+                                <img src="{{ asset('storage/' . Auth::user()->picture) }}" alt="Foto Profil" class="rounded-circle me-2" style="width: 30px; height: 30px; object-fit: cover;">
+                            @endif
                         </a>
                     </li>
                     
