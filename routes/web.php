@@ -80,9 +80,7 @@ Route::get('/select-role', function () {
     return view('select-role');
 });
 
-Route::get('/expert', function () {
-    return view('expert.dashboard-expert');
-});
+Route::get('/expert', [DataAhliTaniController::class, 'dashboard'])->middleware('auth')->name('expert.dashboard');
 
 
 // Route::post('/login/post', [AuthController::class, 'postLogin']);

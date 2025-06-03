@@ -50,9 +50,6 @@
                             <p>Silakan tunggu ahli tani memberikan jawaban atas konsultasi Anda.</p>
                         </div>
                     @endif
-
-                    {{-- Link back to farmer's consultation list (if such a page exists) --}}
-                     {{-- <a href="{{ route('farmer.konsultations') }}" class="btn btn-secondary mt-3">Kembali ke Daftar Konsultasi Saya</a> --}}
                 </div>
             </div>
         </div>

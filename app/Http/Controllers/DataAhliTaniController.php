@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class DataAhliTaniController extends Controller
 {
+    public function dashboard()
+    {
+        $dataAhliTani = DataAhliTani::where('id_ahli_tani', Auth::id())->first();
+        return view('expert.dashboard-expert', compact('dataAhliTani'));
+    }
+
     public function index()
     {
         $dataAhliTani = DataAhliTani::where('id_ahli_tani', Auth::id())->first();

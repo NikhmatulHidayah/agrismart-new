@@ -104,8 +104,39 @@
         duration: 1000,
         once: true,
     });
+
+    // Check if profile data is empty and show modal
+    @unless($dataAhliTani)
+        var profileModal = new bootstrap.Modal(document.getElementById('profileCompletionModal'), {
+            backdrop: 'static',
+            keyboard: false
+        });
+        profileModal.show();
+    @endunless
+
 </script>
 @endpush
+
+<!-- Profile Completion Modal -->
+@unless($dataAhliTani)
+<div class="modal fade" id="profileCompletionModal" tabindex="-1" aria-labelledby="profileCompletionModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="profileCompletionModalLabel">Lengkapi Profil Anda</h5>
+        {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
+      </div>
+      <div class="modal-body">
+        Anda perlu melengkapi data profil Anda untuk dapat menggunakan semua fitur ahli di AgriSmart. Silakan isi data profil Anda sekarang.
+      </div>
+      <div class="modal-footer">
+        {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
+        <a href="{{ route('expert.profile.create') }}" class="btn btn-primary">Lengkapi Profil</a>
+      </div>
+    </div>
+  </div>
+</div>
+@endunless
 
 @endsection
  

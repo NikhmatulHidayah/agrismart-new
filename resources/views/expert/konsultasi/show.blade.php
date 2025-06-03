@@ -54,9 +54,11 @@
         <div class="consult-detail-body">
             <p><strong>Permasalahan:</strong> {{ $konsultasi->question }}</p>
             <p><strong>Dari Petani:</strong> {{ $konsultasi->petani->name ?? '-' }}</p>
+            {{-- DEBUG: Tampilkan nilai picture_question --}}
+            <p><strong>Debug Picture Path (Expert):</strong> {{ $konsultasi->picture_question ?? 'Kosong' }}</p>
             @if ($konsultasi->picture_question)
             <p><strong>Foto:</strong></p>
-            <img src="{{ Storage::url($konsultasi->picture_question) }}" alt="Foto Konsultasi" class="img-fluid" style="max-width: 400px;">
+            <img src="{{ asset('storage/' . $konsultasi->picture_question) }}" alt="Foto Konsultasi" class="img-fluid rounded shadow" style="max-width: 400px; height: auto;">
             @endif
             <p><strong>Status:</strong> {{ $konsultasi->is_done ? 'Selesai' : 'Menunggu Jawaban' }}</p>
 
@@ -84,6 +86,7 @@
             @endif
         </div>
     </div>
+
     @else
     <div class="alert alert-warning">Konsultasi tidak ditemukan atau bukan untuk Anda.</div>
     @endif
